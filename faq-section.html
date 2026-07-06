@@ -1,0 +1,113 @@
+<!-- ============================================================
+  FAQ SECTION  paste before the footer on index.html
+  (the matching FAQPage JSON-LD is already in seo-head-blocks.html)
+  Uses native <details>/<summary>  works without JS, crawler-visible.
+  Style hooks: .faq, .faq details, .faq summary  add CSS below to style.css
+============================================================ -->
+
+<section class="faq" id="faq" aria-labelledby="faq-heading">
+  <h2 id="faq-heading"><span aria-hidden="true">? </span>faq <span class="dim">// cat faq.md</span></h2>
+
+  <details>
+    <summary>Who is Abubakkar Sajid?</summary>
+    <p>Abubakkar Sajid is a full-stack developer based in Lahore, Pakistan, with 3+ years of experience building production web applications, SaaS platforms, and backend systems. He works as a Product Developer at <a href="https://www.triadlabz.com">Triad Labz</a> and has founded live products including <a href="/projects.html">ForiSay and API Test Lab</a>.</p>
+  </details>
+
+  <details>
+    <summary>What services does Abubakkar Sajid offer?</summary>
+    <p>Backend and API development, full-stack web apps with React and Next.js, SaaS product development, AI integration and WhatsApp chatbots, Linux server administration and DevOps, and workflow automation with n8n. See the full <a href="/services.html">services page</a>. Available for remote and freelance projects worldwide.</p>
+  </details>
+
+  <details>
+    <summary>How much experience does Abubakkar have?</summary>
+    <p>Abubakkar has 3+ years of professional experience across full-time, contract, and freelance roles  including backend development for live platforms like madadgaar.com.pk and EchoRead, and leading a development team as Team Lead. Full history on the <a href="/experience.html">experience page</a>.</p>
+  </details>
+
+  <details>
+    <summary>What is Abubakkar's tech stack?</summary>
+    <p>Core stack: Node.js, Express.js, FastAPI, React, Next.js, TypeScript, Python, MongoDB, and Redis  with DevOps skills in Docker, Nginx, Linux VPS management and CI/CD, plus AI integration using Gemini, OpenAI, and Claude APIs. Details on the <a href="/skills.html">skills page</a>.</p>
+  </details>
+
+  <details>
+    <summary>Does Abubakkar work with international / remote clients?</summary>
+    <p>Yes. Abubakkar works with remote and international clients worldwide as a freelance and contract developer, with professional English proficiency and a track record of on-time delivery  see <a href="/reviews.html">client reviews</a>.</p>
+  </details>
+
+  <details>
+    <summary>What is ForiSay?</summary>
+    <p>ForiSay is an AI-powered WhatsApp chatbot built by Abubakkar Sajid at Triad Labz. It auto-replies to customer messages 24/7 using the WhatsApp Business API, captures leads, and is designed for e-commerce, real estate, and service businesses. Live at <a href="https://www.forisay.com">forisay.com</a>.</p>
+  </details>
+
+  <details>
+    <summary>How can I hire Abubakkar Sajid?</summary>
+    <p>Use the <a href="/contact.html">contact page</a> or email <a href="mailto:abubakkarsajid4@gmail.com">abubakkarsajid4@gmail.com</a>. He typically replies within 24 hours and takes on web, SaaS, backend, and AI projects.</p>
+  </details>
+
+  <details>
+    <summary>Where is Abubakkar Sajid based?</summary>
+    <p>Abubakkar Sajid is based in Lahore, Punjab, Pakistan, and works with clients globally through remote and hybrid arrangements.</p>
+  </details>
+</section>
+
+
+<!-- ============================================================
+  CSS  add to style.css
+============================================================ -->
+<style>
+/* ===== FAQ ===== */
+.faq { max-width: 960px; margin: 64px auto; padding: 0 24px; }
+.faq h2 { font-size: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); margin-bottom: 8px; }
+.faq h2 .dim { color: var(--text-dim); font-size: 13px; font-weight: 400; }
+.faq details { border-bottom: 1px solid var(--border); }
+.faq summary {
+  cursor: pointer; padding: 16px 0; font-family: var(--font-mono);
+  font-size: 15px; color: var(--text); list-style: none; position: relative;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::before { content: "➜ "; color: var(--accent); }
+.faq details[open] summary { color: var(--accent); }
+.faq details p {
+  font-family: var(--font-sans); color: var(--text-dim);
+  font-size: 15px; line-height: 1.7; padding: 0 0 16px 24px; max-width: 70ch;
+}
+.faq details p a { color: var(--accent); text-decoration: none; }
+.faq details p a:hover { text-decoration: underline; }
+</style>
+
+
+<!-- ============================================================
+  ANSWER-FIRST INTRO PARAGRAPHS  paste as the first <p> under
+  each page's <h1>. These are what snippets & LLMs lift.
+============================================================ -->
+
+<!-- index.html, directly under the h1 / hero terminal -->
+<p class="page-intro">Abubakkar Sajid is a full-stack developer and backend engineer in Lahore, Pakistan, building production SaaS platforms, APIs, and AI-powered chatbots for clients worldwide.</p>
+
+<!-- about.html -->
+<p class="page-intro">This page is about Abubakkar Sajid  a full-stack developer from Lahore with 3+ years shipping production applications, certified in full-stack development, cyber security, and AI engineering.</p>
+
+<!-- skills.html -->
+<p class="page-intro">Abubakkar Sajid's technical skills span backend (Node.js, Express, FastAPI), frontend (React, Next.js, TypeScript), databases (MongoDB, Redis), DevOps (Docker, Nginx, Linux VPS), and AI integration.</p>
+
+<!-- projects.html -->
+<p class="page-intro">Production projects built by Abubakkar Sajid  including the ForiSay AI WhatsApp chatbot, API Test Lab SaaS, and the Madadgaar marketplace backend  all live and running today.</p>
+
+<!-- services.html -->
+<p class="page-intro">Hire Abubakkar Sajid  a freelance full-stack developer in Pakistan  for backend APIs, SaaS products, AI WhatsApp chatbots, React/Next.js apps, server administration, and automation.</p>
+
+<!-- experience.html -->
+<p class="page-intro">Abubakkar Sajid's work experience spans 3+ years, from frontend internships to backend team lead  currently Product Developer at Triad Labz in Lahore, Pakistan.</p>
+
+<!-- reviews.html -->
+<p class="page-intro">Client reviews for Abubakkar Sajid, full-stack developer  consistent 5-star feedback for on-time delivery, clean code, and clear communication across e-commerce, SaaS, and platform projects.</p>
+
+<!-- contact.html -->
+<p class="page-intro">Contact Abubakkar Sajid, full-stack developer in Lahore, Pakistan  for project inquiries email abubakkarsajid4@gmail.com or use the form below; replies within 24 hours.</p>
+
+<style>
+/* ===== PAGE INTRO (answer-first paragraph) ===== */
+.page-intro {
+  font-family: var(--font-sans); color: var(--text-dim);
+  font-size: 16px; line-height: 1.7; max-width: 70ch; margin: 16px auto 40px;
+}
+</style>

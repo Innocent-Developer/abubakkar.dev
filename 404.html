@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404  Page Not Found | Abubakkar Sajid</title>
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#0A0E0D">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230A0E0D'/%3E%3Ctext x='50' y='72' font-size='64' text-anchor='middle' fill='%2322C55E' font-family='monospace'%3E%E2%96%8A%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0A0E0D;--bg-elevated:#101614;--border:#1E2A26;--text:#E8EFEC;--text-dim:#8A9A93;--accent:#22C55E;--red:#EF4444;--amber:#F59E0B;--radius:10px}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+    .terminal{background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);max-width:640px;width:100%;overflow:hidden}
+    .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--border)}
+    .dot{width:12px;height:12px;border-radius:50%}
+    .dot.r{background:var(--red)}.dot.a{background:var(--amber)}.dot.g{background:var(--accent)}
+    .bar span{margin-left:auto;margin-right:auto;color:var(--text-dim);font-size:12px}
+    .body{padding:24px;font-size:14px;line-height:2}
+    .prompt{color:var(--accent)}
+    .err{color:var(--red)}
+    .dim{color:var(--text-dim)}
+    a{color:var(--accent);text-decoration:none}
+    a:hover::after{content:" ↗"}
+    .cursor{display:inline-block;width:9px;height:18px;background:var(--accent);vertical-align:text-bottom;animation:blink 1s steps(1) infinite}
+    @keyframes blink{50%{opacity:0}}
+    @media (prefers-reduced-motion: reduce){.cursor{animation:none}}
+  </style>
+</head>
+<body>
+  <main class="terminal" role="main">
+    <div class="bar" aria-hidden="true">
+      <span class="dot r"></span><span class="dot a"></span><span class="dot g"></span>
+      <span>zsh  80×24</span>
+    </div>
+    <div class="body">
+      <h1 style="font-size:14px;font-weight:400"><span class="prompt">➜ ~</span> open requested_page</h1>
+      <p class="err">✘ error 404: page not found</p>
+      <p class="dim"># the file you're looking for was moved, renamed, or never existed</p>
+      <br>
+      <p><span class="prompt">➜ ~</span> ls ~/pages</p>
+      <p>
+        <a href="/">home</a>&nbsp;&nbsp;
+        <a href="/about.html">about</a>&nbsp;&nbsp;
+        <a href="/skills.html">skills</a>&nbsp;&nbsp;
+        <a href="/projects.html">projects</a>&nbsp;&nbsp;
+        <a href="/services.html">services</a>&nbsp;&nbsp;
+        <a href="/experience.html">experience</a>&nbsp;&nbsp;
+        <a href="/reviews.html">reviews</a>&nbsp;&nbsp;
+        <a href="/contact.html">contact</a>
+      </p>
+      <br>
+      <p><span class="prompt">➜ ~</span> cd /home <span class="cursor" aria-hidden="true"></span></p>
+    </div>
+  </main>
+</body>
+</html>

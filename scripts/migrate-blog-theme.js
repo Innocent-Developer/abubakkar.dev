@@ -49,7 +49,7 @@ function footer(prefix) {
             <span class="dot-amber"></span>
             <span class="dot-green"></span>
           </div>
-          <span class="terminal-title">footer.sh — ~/abubakkar</span>
+          <span class="terminal-title">footer.sh  ~/abubakkar</span>
         </div>
         <div class="terminal-body footer-body">
           <div class="footer-grid">
@@ -160,7 +160,7 @@ function migrateArticle(file) {
   <meta name="author" content="Abubakkar Sajid">
   <meta name="theme-color" content="#0A0E0D">
   <meta property="og:type" content="article">
-  <meta property="og:site_name" content="Abubakkar Sajid — Portfolio">
+  <meta property="og:site_name" content="Abubakkar Sajid  Portfolio">
   <meta property="og:title" content="${title.replace(/"/g, '&quot;')}">
   <meta property="og:description" content="${description.replace(/"/g, '&quot;')}">
   <meta property="og:url" content="${canonical}">

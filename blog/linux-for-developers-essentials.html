@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linux for Developers: Essential Commands & Environment Setup | Abubakkar Sajid</title>
+  <meta name="description" content="Essential Linux for developers: terminal commands, shell basics, SSH, package managers, and dev environment setup. Get productive on Linux and WSL.">
+  <link rel="canonical" href="https://www.abubakkar.dev/blog/linux-for-developers-essentials.html">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Abubakkar Sajid">
+  <meta name="theme-color" content="#0A0E0D">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Abubakkar Sajid — Portfolio">
+  <meta property="og:title" content="Linux for Developers: Essential Commands & Environment Setup | Abubakkar Sajid">
+  <meta property="og:description" content="Essential Linux for developers: terminal commands, shell basics, SSH, package managers, and dev environment setup. Get productive on Linux and WSL.">
+  <meta property="og:url" content="https://www.abubakkar.dev/blog/linux-for-developers-essentials.html">
+  <meta property="og:image" content="https://www.abubakkar.dev/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230A0E0D'/%3E%3Ctext x='50' y='72' font-size='64' text-anchor='middle' fill='%2322C55E' font-family='monospace'%3E%E2%96%8A%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Linux for Developers: Essential Commands & Environment Setup","description":"Essential Linux for developers: commands, SSH, and dev environment.","url":"https://www.abubakkar.dev/blog/linux-for-developers-essentials.html","datePublished":"2025-02-13","dateModified":"2025-02-13","author":{"@type":"Person","name":"Abubakkar Sajid","url":"https://www.abubakkar.dev/"},"publisher":{"@type":"Person","name":"Abubakkar Sajid","url":"https://www.abubakkar.dev/"},"inLanguage":"en-US"}
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo no-arrow">➜ ~/abubakkar</a>
+      <nav class="nav-desktop" aria-label="Main navigation">
+        <a href="../about.html" class="nav-link no-arrow">/about</a>
+        <a href="../skills.html" class="nav-link no-arrow">/skills</a>
+        <a href="../projects.html" class="nav-link no-arrow">/projects</a>
+        <a href="../services.html" class="nav-link no-arrow">/services</a>
+        <a href="../experience.html" class="nav-link no-arrow">/experience</a>
+        <a href="../reviews.html" class="nav-link no-arrow">/reviews</a>
+        <a href="../blog/index.html" class="nav-link no-arrow">/blog</a>
+        <a href="../contact.html" class="nav-link no-arrow">/contact</a>
+      </nav>
+      <div class="header-actions">
+        <a href="../contact.html" class="btn-cmd btn-cmd--primary btn-cmd--hire no-arrow">$ ./hire_me.sh<span class="btn-cursor">▊</span></a>
+        <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">[≡]</button>
+      </div>
+    </div>
+    <nav class="nav-mobile" aria-label="Mobile navigation">
+      <div class="nav-mobile-prompt">➜ ~ ls ~/pages</div>
+      <a href="../about.html">about.html</a>
+      <a href="../skills.html">skills.html</a>
+      <a href="../projects.html">projects.html</a>
+      <a href="../services.html">services.html</a>
+      <a href="../experience.html">experience.html</a>
+      <a href="../reviews.html">reviews.html</a>
+      <a href="../blog/index.html">blog/index.html</a>
+      <a href="../contact.html">contact.html</a>
+    </nav>
+  </header>
+  <main class="container page-main blog-article-main">
+    <section class="section" data-reveal>
+      <h2 class="section-heading">▤ blog <span class="comment">// Article</span></h2>
+      <div class="terminal blog-article-terminal">
+        <div class="terminal-titlebar">
+          <div class="terminal-dots">
+            <span class="dot-red"></span>
+            <span class="dot-amber"></span>
+            <span class="dot-green"></span>
+          </div>
+          <span class="terminal-title">cat article.md</span>
+        </div>
+        <div class="terminal-body blog-article-body">
+<nav class="blog-breadcrumb" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a> <span aria-hidden="true">/</span>
+                    <a href="index.html">Blog</a> <span aria-hidden="true">/</span>
+                    <span>Linux for Developers</span>
+                </nav>
+                <header class="blog-article-header">
+                    <div class="blog-meta-row">
+                        <span class="blog-meta">Linux · Feb 13, 2025</span>
+                        <span class="blog-read-time">6 min read</span>
+                    </div>
+                    <h1 id="article-title" class="blog-article-title">Linux for Developers: Essential Commands & Environment Setup</h1>
+                    <p class="blog-excerpt">Get productive on Linux: essential terminal commands, shell basics, SSH, package managers, and setting up a dev environment. Works on native Linux and WSL.</p>
+                    <p class="blog-author">By <a href="../about.html">Abubakkar Sajid</a> · Full Stack Developer</p>
+                </header>
+                <div class="blog-prose">
+                    <p>Most servers and many dev machines run Linux. Knowing the basics makes deployment, scripting, and daily coding much easier. Here’s a focused set of essentials.</p>
+
+                    <h2>1. Essential Commands</h2>
+                    <p>Navigate and manage files: <code>cd</code>, <code>pwd</code>, <code>ls -la</code>, <code>mkdir</code>, <code>cp</code>, <code>mv</code>, <code>rm -rf</code> (use with care). View files: <code>cat</code>, <code>less</code>, <code>head</code>, <code>tail -f</code>. Search: <code>grep</code>, <code>find</code>. Permissions: <code>chmod</code>, <code>chown</code>. Process management: <code>ps aux</code>, <code>kill</code>, <code>killall</code>.</p>
+
+                    <h2>2. Shell Basics</h2>
+                    <p>Use <code>|</code> to pipe output, <code>&gt;</code> and <code>&gt;&gt;</code> to redirect. Chain commands with <code>&amp;&amp;</code> and <code>;</code>. Edit your <code>.bashrc</code> or <code>.zshrc</code> for aliases and PATH. Use <code>nano</code> or <code>vim</code> for quick edits in the terminal.</p>
+
+                    <h2>3. SSH and Remote Access</h2>
+                    <p>Connect to servers with <code>ssh user@host</code>. Use key-based auth: <code>ssh-keygen</code> and copy your public key to the server’s <code>~/.ssh/authorized_keys</code>. Use <code>scp</code> or <code>rsync</code> to transfer files securely.</p>
+
+                    <h2>4. Package Managers</h2>
+                    <p>On Ubuntu/Debian: <code>apt update &amp;&amp; apt install &lt;package&gt;</code>. On Fedora: <code>dnf install</code>. On Arch: <code>pacman -S</code>. Use these to install Node, Python, Docker, and dev tools—or use version managers (nvm, pyenv) for runtimes.</p>
+
+                    <h2>5. Dev Environment on Linux / WSL</h2>
+                    <p>Install Node.js (nvm), Git, and your editor (VS Code works great on Linux and WSL). Use WSL2 on Windows for a full Linux environment. Keep your dotfiles in a repo so you can replicate your setup on any machine.</p>
+
+                    <p>Need help with Linux servers or deployment? <a href="../contact.html">Contact me</a>—I can help you configure and maintain Linux-based development and production environments.</p>
+                </div>
+                <footer class="blog-article-actions">
+                    <a href="index.html" class="btn-cmd no-arrow">← Back to Blog</a>
+                    <a href="../contact.html" class="btn-cmd btn-cmd--primary no-arrow">Hire Me for Your Project</a>
+                </footer>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="terminal footer-terminal">
+        <div class="terminal-titlebar">
+          <div class="terminal-dots">
+            <span class="dot-red"></span>
+            <span class="dot-amber"></span>
+            <span class="dot-green"></span>
+          </div>
+          <span class="terminal-title">footer.sh — ~/abubakkar</span>
+        </div>
+        <div class="terminal-body footer-body">
+          <div class="footer-grid">
+            <div class="footer-col footer-brand">
+              <p class="footer-logo">➜ ~/abubakkar</p>
+              <p class="footer-tagline">Full-stack developer building SaaS, APIs &amp; AI products from Lahore, Pakistan.</p>
+              <p class="footer-meta"><span class="footer-status">●</span> Open to remote &amp; freelance</p>
+            </div>
+            <nav class="footer-col" aria-label="Footer navigation">
+              <h3 class="footer-heading">Pages</h3>
+              <ul class="footer-links">
+                <li><a href="../index.html" class="no-arrow">home</a></li>
+                <li><a href="../about.html" class="no-arrow">about</a></li>
+                <li><a href="../skills.html" class="no-arrow">skills</a></li>
+                <li><a href="../projects.html" class="no-arrow">projects</a></li>
+                <li><a href="../services.html" class="no-arrow">services</a></li>
+                <li><a href="../experience.html" class="no-arrow">experience</a></li>
+                <li><a href="../reviews.html" class="no-arrow">reviews</a></li>
+                <li><a href="../blog/index.html" class="no-arrow">blog</a></li>
+                <li><a href="../contact.html" class="no-arrow">contact</a></li>
+              </ul>
+            </nav>
+            <div class="footer-col">
+              <h3 class="footer-heading">Contact</h3>
+              <ul class="footer-links">
+                <li><a href="mailto:hello@abubakkar.dev" class="no-arrow">hello@abubakkar.dev</a></li>
+                <li><a href="tel:+923241851476" class="no-arrow">+92 324 1851476</a></li>
+                <li><a href="../contact.html" class="no-arrow">Get in touch →</a></li>
+                <li><a href="../assets/cv.pdf" class="no-arrow" target="_blank" rel="noopener">Download CV</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h3 class="footer-heading">Connect</h3>
+              <div class="footer-socials">
+                <a href="https://github.com/Innocent-Developer" class="footer-social-chip no-arrow" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
+                <a href="https://www.linkedin.com/in/mughal-abubakkar" class="footer-social-chip no-arrow" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
+                <a href="https://www.instagram.com/dev_abubakkar/" class="footer-social-chip no-arrow" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
+                <a href="mailto:hello@abubakkar.dev" class="footer-social-chip no-arrow" aria-label="Email">Email</a>
+              </div>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p class="footer-copy">© 2026 Abubakkar Sajid · Built with HTML, CSS &amp; JS</p>
+            <a href="#" class="back-to-top no-arrow">▲ back to top</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <div class="toast" data-toast role="status" aria-live="polite">
+    <span class="toast-message" data-toast-message></span>
+    <button type="button" class="toast-dismiss">[dismiss]</button>
+  </div>
+  <script src="../js/terminal.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

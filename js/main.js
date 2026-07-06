@@ -25,12 +25,16 @@
     var path = window.location.pathname;
     var page = path.split('/').pop() || 'index.html';
     if (page === '' || page === '/') page = 'index.html';
+    var inBlog = path.indexOf('/blog') !== -1 || path.indexOf('\\blog') !== -1;
 
     links.forEach(function (link) {
       var href = link.getAttribute('href');
       if (!href) return;
       var linkPage = href.split('/').pop();
-      if (linkPage === page) {
+      var isBlogLink = href.indexOf('blog') !== -1;
+      var active = isBlogLink ? inBlog : linkPage === page;
+
+      if (active) {
         link.classList.add('active');
         if (link.classList.contains('nav-link') && !link.querySelector('.nav-cursor')) {
           var cursor = document.createElement('span');

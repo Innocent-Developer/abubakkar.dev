@@ -146,7 +146,7 @@
       { type: 'output', text: 'Full-Stack Developer · Backend & SaaS Builder' },
       { type: 'blank', text: '' },
       { type: 'command', text: '➜ ~ ./abubakkar --stats' },
-      { type: 'output', text: '20+ projects shipped · 7+ SaaS/products built · 3+ years production' },
+      { type: 'output', text: '30+ projects shipped · 7+ SaaS/products built · 3+ years production' },
       { type: 'blank', text: '' },
       { type: 'command', text: '➜ ~ ./abubakkar --location' },
       { type: 'output', text: 'Lahore, Pakistan | Open to Remote & Freelance' },

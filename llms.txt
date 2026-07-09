@@ -22,7 +22,7 @@
 ## Pages
 - [About](https://www.abubakkar.dev/about.html): background, certifications, education
 - [Services](https://www.abubakkar.dev/services.html): what I build and how engagements work
-- [Projects](https://www.abubakkar.dev/projects.html): 20+ shipped projects, 7+ SaaS products
+- [Projects](https://www.abubakkar.dev/projects.html): 30+ shipped projects, 7+ SaaS products
 - [Experience](https://www.abubakkar.dev/experience.html): 10 roles, 3+ years in production
 - [Blog](https://www.abubakkar.dev/blog/index.html): Node.js, SaaS & chatbot tutorials
 - [Contact](https://www.abubakkar.dev/contact.html): email, phone, contact form

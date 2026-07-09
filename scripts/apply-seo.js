@@ -86,7 +86,7 @@ const PAGE_META = {
   'projects.html': {
     title: 'Projects  SaaS, APIs & AI Chatbots Shipped Live | Abubakkar Sajid',
     description:
-      '20+ shipped projects including ForiSay (AI WhatsApp chatbot), API Test Lab (SaaS) & Madadgaar marketplace. Real products, live in production, built end to end.',
+      '30+ shipped projects including ForiSay (AI WhatsApp chatbot), API Test Lab (SaaS) & Madadgaar marketplace. Real products, live in production, built end to end.',
     canonical: 'https://www.abubakkar.dev/projects.html',
     ogType: 'website',
   },

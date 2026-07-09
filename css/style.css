@@ -2544,6 +2544,49 @@ body.menu-open {
   font-weight: 600;
 }
 
+.blog-prose pre {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: rgba(10, 14, 13, 0.6);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.blog-prose pre code {
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: inherit;
+}
+
+.blog-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.blog-prose th,
+.blog-prose td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.65rem;
+  text-align: left;
+}
+
+.blog-prose th {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  background: rgba(16, 22, 20, 0.5);
+}
+
 .blog-article-actions {
   display: flex;
   flex-wrap: wrap;

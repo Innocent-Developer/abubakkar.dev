@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BK5LXS2MRH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-BK5LXS2MRH');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building a Credit-Based Billing System for AI SaaS Apps | Abubakkar Sajid</title>
+  <meta name="description" content="How to design and build a credit-based billing system for AI SaaS apps using LLM APIs. Covers token accounting, plan tiers, edge cases, and real production bugs.">
+  <link rel="canonical" href="https://www.abubakkar.dev/blog/ai-saas-credit-billing-system.html">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Abubakkar Sajid">
+  <meta name="theme-color" content="#0A0E0D">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Abubakkar Sajid Portfolio">
+  <meta property="og:title" content="Building a Credit-Based Billing System for AI SaaS Apps | Abubakkar Sajid">
+  <meta property="og:description" content="How to design and build a credit-based billing system for AI SaaS apps using LLM APIs. Covers token accounting, plan tiers, edge cases, and real production bugs.">
+  <meta property="og:url" content="https://www.abubakkar.dev/blog/ai-saas-credit-billing-system.html">
+  <meta property="og:image" content="https://www.abubakkar.dev/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230A0E0D'/%3E%3Ctext x='50' y='72' font-size='64' text-anchor='middle' fill='%2322C55E' font-family='monospace'%3E%E2%96%8A%3C/text%3E%3C/svg%3E">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" as="style">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Building a Credit-Based Billing System for AI SaaS Apps",
+    "description": "How to design and build a credit-based billing system for AI SaaS apps using LLM APIs. Covers token accounting, plan tiers, edge cases, and real production bugs.",
+    "image": "https://www.abubakkar.dev/assets/og-image.png",
+    "author": { "@id": "https://www.abubakkar.dev/#person" },
+    "publisher": { "@id": "https://www.abubakkar.dev/#person" },
+    "datePublished": "2026-07-09",
+    "dateModified": "2026-07-09",
+    "mainEntityOfPage": "https://www.abubakkar.dev/blog/ai-saas-credit-billing-system.html",
+    "inLanguage": "en"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://www.abubakkar.dev/#person",
+    "name": "Abubakkar Sajid",
+    "url": "https://www.abubakkar.dev/",
+    "image": "https://www.abubakkar.dev/assets/og-image.png",
+    "jobTitle": "Full-Stack & Backend Developer",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Triad Labz",
+      "url": "https://www.triadlabz.com"
+    },
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Lahore Leads University"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Lahore",
+      "addressCountry": "PK"
+    },
+    "email": "mailto:hello@abubakkar.dev",
+    "telephone": "+92-324-1851476",
+    "sameAs": [
+      "https://github.com/Innocent-Developer",
+      "https://www.linkedin.com/in/mughal-abubakkar",
+      "https://www.instagram.com/abubakkar.dev/"
+    ],
+    "knowsAbout": [
+      "Node.js",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "FastAPI",
+      "Python",
+      "MongoDB",
+      "Redis",
+      "Docker",
+      "Nginx",
+      "Linux server administration",
+      "WhatsApp Business API",
+      "AI chatbots",
+      "SaaS development",
+      "REST APIs"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo no-arrow">➜ ~/abubakkar</a>
+      <nav class="nav-desktop" aria-label="Main navigation">
+        <a href="../about.html" class="nav-link no-arrow">/about</a>
+        <a href="../skills.html" class="nav-link no-arrow">/skills</a>
+        <a href="../projects.html" class="nav-link no-arrow">/projects</a>
+        <a href="../services.html" class="nav-link no-arrow">/services</a>
+        <a href="../experience.html" class="nav-link no-arrow">/experience</a>
+        <a href="../reviews.html" class="nav-link no-arrow">/reviews</a>
+        <a href="../blog/index.html" class="nav-link no-arrow">/blog</a>
+        <a href="../contact.html" class="nav-link no-arrow">/contact</a>
+      </nav>
+      <div class="header-actions">
+        <a href="../contact.html" class="btn-cmd btn-cmd--primary btn-cmd--hire no-arrow">$ ./hire_me.sh<span class="btn-cursor">▊</span></a>
+        <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">[≡]</button>
+      </div>
+    </div>
+    <nav class="nav-mobile" aria-label="Mobile navigation">
+      <div class="nav-mobile-prompt">➜ ~ ls ~/pages</div>
+      <a href="../about.html">about.html</a>
+      <a href="../skills.html">skills.html</a>
+      <a href="../projects.html">projects.html</a>
+      <a href="../services.html">services.html</a>
+      <a href="../experience.html">experience.html</a>
+      <a href="../reviews.html">reviews.html</a>
+      <a href="../blog/index.html">blog/index.html</a>
+      <a href="../contact.html">contact.html</a>
+    </nav>
+  </header>
+  <main class="container page-main blog-article-main">
+    <section class="section" data-reveal>
+      <h2 class="section-heading">▤ blog <span class="comment">// Article</span></h2>
+      <div class="terminal blog-article-terminal">
+        <div class="terminal-titlebar">
+          <div class="terminal-dots">
+            <span class="dot-red"></span>
+            <span class="dot-amber"></span>
+            <span class="dot-green"></span>
+          </div>
+          <span class="terminal-title">cat article.md</span>
+        </div>
+        <div class="terminal-body blog-article-body">
+          <nav class="blog-breadcrumb" aria-label="Breadcrumb">
+            <a href="../index.html">Home</a> <span aria-hidden="true">/</span>
+            <a href="index.html">Blog</a> <span aria-hidden="true">/</span>
+            <span>AI SaaS Credit Billing</span>
+          </nav>
+          <header class="blog-article-header">
+            <div class="blog-meta-row">
+              <span class="blog-meta">AI · Backend · Jul 9, 2026</span>
+              <span class="blog-read-time">9 min read</span>
+            </div>
+            <h1 id="article-title" class="blog-article-title">Building a Credit-Based Billing System for AI SaaS Apps</h1>
+            <p class="blog-excerpt">How to design token-based billing for LLM-powered SaaS products — plan tiers, cost math, and the edge cases that break production.</p>
+            <p class="blog-author">By <a href="../about.html">Abubakkar Sajid</a> · Full Stack Developer</p>
+          </header>
+          <div class="blog-prose">
+            <p>Most tutorials on AI SaaS billing stop at "charge per API call." That breaks the moment you have multiple LLM providers, embedding costs, and tiered plans with different markup ratios. This guide covers the actual architecture — and the production bugs I found and fixed — while building a credit system for a RAG (Retrieval-Augmented Generation) application.</p>
+
+            <h2>Why Per-Call Billing Doesn't Work</h2>
+            <p>LLM cost isn't flat. A single request can consume:</p>
+            <ul>
+              <li><strong>Input tokens</strong> – priced differently across models (e.g., Gemini Flash-Lite vs. GPT-4o)</li>
+              <li><strong>Output tokens</strong> – usually 2–4x the cost of input tokens</li>
+              <li><strong>Embedding tokens</strong> – separate pricing tier for RAG/vector search calls</li>
+              <li><strong>Retries and function calls</strong> – multi-turn tool use multiplies token consumption per user action</li>
+            </ul>
+            <p>Charging a flat "1 credit per request" either underprices heavy users or overprices light ones. The fix is a <strong>token-to-credit conversion layer</strong> sitting between your provider bill and your user-facing pricing.</p>
+
+            <h2>1. Core Schema Design</h2>
+            <p>Track usage at the token level, not the request level:</p>
+            <pre><code>// models/UsageLog.js
+const usageLogSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true, index: true },
+  provider: { type: String, enum: ["gemini", "openai", "claude"], required: true },
+  model: { type: String, required: true },
+  inputTokens: { type: Number, required: true },
+  outputTokens: { type: Number, required: true },
+  embeddingTokens: { type: Number, default: 0 },
+  creditsCharged: { type: Number, required: true },
+  createdAt: { type: Date, default: Date.now, index: true }
+});
+
+usageLogSchema.index({ userId: 1, createdAt: -1 });</code></pre>
+
+            <h2>2. The <code>creditConfig.js</code> Pattern (and Its Bugs)</h2>
+            <p>Centralize your pricing logic in one config file — never scatter cost math across routes. Here's the pattern, along with five bugs that commonly slip into production versions of this exact file:</p>
+            <pre><code>// config/creditConfig.js
+const PLAN_LIMITS = {
+  free: { monthlyCredits: 100, maxCreditsPerRequest: 5 },
+  pro: { monthlyCredits: 5000, maxCreditsPerRequest: 50 },
+  enterprise: { monthlyCredits: Infinity, maxCreditsPerRequest: Infinity }
+};
+
+const TOKENS_PER_CREDIT = {
+  free: 1000,   // 1 credit = 1000 tokens
+  pro: 1500,    // cheaper per-token rate at higher tier
+  enterprise: 2000
+};
+
+function tokensToCredits(totalTokens, plan) {
+  const ratio = TOKENS_PER_CREDIT[plan] ?? TOKENS_PER_CREDIT.free;
+  return Math.ceil(totalTokens / ratio);
+}
+
+module.exports = { PLAN_LIMITS, TOKENS_PER_CREDIT, tokensToCredits };</code></pre>
+            <p><strong>Bugs to check for in your own implementation:</strong></p>
+            <ol>
+              <li><strong>Negative env var handling</strong> – if <code>MONTHLY_CREDITS_OVERRIDE</code> is read from <code>process.env</code> without validation, a misconfigured negative value silently grants unlimited usage instead of throwing.</li>
+              <li><strong><code>Infinity</code> serialization</strong> – <code>Infinity</code> doesn't survive <code>JSON.stringify()</code> (becomes <code>null</code>). If plan limits are cached in Redis or sent to the frontend, enterprise limits appear as <code>null</code> instead of unlimited.</li>
+              <li><strong>Mutable plan budgets</strong> – if <code>PLAN_LIMITS</code> objects are passed by reference and mutated per-request (e.g., decrementing a shared object instead of a per-user copy), one user's usage can corrupt another's limit.</li>
+              <li><strong>Non-monotonic tokens-per-credit ratio</strong> – pricing that gets <em>cheaper per token</em> at higher tiers (as shown above) needs to be intentional. If it's accidental, downgrading users mid-cycle can make their remaining credits worth less than expected, causing support tickets.</li>
+              <li><strong>Rounding direction</strong> – always round token-to-credit conversion <strong>up</strong> (<code>Math.ceil</code>), never down. Rounding down means you absorb the cost of partial credits at scale.</li>
+            </ol>
+
+            <h2>3. Enforcing Limits Before the LLM Call</h2>
+            <p>Check and reserve credits <em>before</em> calling the provider API — not after — or a slow user can burn through their limit with concurrent requests before the deduction lands:</p>
+            <pre><code>// middleware/checkCredits.js
+const User = require("../models/User");
+const { PLAN_LIMITS } = require("../config/creditConfig");
+
+async function checkCredits(req, res, next) {
+  const user = await User.findById(req.user.id);
+  const limit = PLAN_LIMITS[user.plan];
+
+  if (user.creditsUsedThisMonth >= limit.monthlyCredits) {
+    return res.status(429).json({
+      error: "CREDIT_LIMIT_EXCEEDED",
+      message: "Monthly credit limit reached. Upgrade your plan to continue.",
+      creditsRemaining: 0
+    });
+  }
+
+  // Optimistic reservation — reconcile actual cost after the LLM response
+  req.creditReservation = Math.min(limit.maxCreditsPerRequest, limit.monthlyCredits - user.creditsUsedThisMonth);
+  next();
+}
+
+module.exports = checkCredits;</code></pre>
+            <p>Reconcile the reservation with actual token usage in the response handler, and use <code>findOneAndUpdate</code> with <code>$inc</code> for atomic credit deduction — never read-modify-write on the user document, which race-conditions under concurrent requests.</p>
+
+            <h2>4. Cost Analysis Before You Set Prices</h2>
+            <p>Before launching a plan, model your margin per tier using real provider pricing:</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Plan</th>
+                  <th>Monthly Price</th>
+                  <th>Credits</th>
+                  <th>Est. Tokens</th>
+                  <th>Provider Cost</th>
+                  <th>Gross Margin</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Free</td>
+                  <td>$0</td>
+                  <td>100</td>
+                  <td>~100K</td>
+                  <td>~$0.02</td>
+                  <td>Loss leader</td>
+                </tr>
+                <tr>
+                  <td>Pro</td>
+                  <td>$19</td>
+                  <td>5,000</td>
+                  <td>~7.5M</td>
+                  <td>~$1.10</td>
+                  <td>~94%</td>
+                </tr>
+                <tr>
+                  <td>Enterprise</td>
+                  <td>Custom</td>
+                  <td>Unlimited</td>
+                  <td>Variable</td>
+                  <td>Metered</td>
+                  <td>Negotiated</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>Run this analysis per-provider (Gemini Flash-Lite, GPT-4o-mini, Claude Haiku) since embedding and inference pricing shifts frequently — hard-coding a single provider's rates into your margin model is a common mistake when providers update pricing without notice.</p>
+
+            <h2>FAQ: AI SaaS Billing Systems</h2>
+            <h3>Should I bill by tokens or by requests?</h3>
+            <p>Tokens. Request-based billing works only if every request has near-identical cost, which isn't true once you support multiple models, tool calls, or RAG retrieval steps.</p>
+            <h3>How do I handle users who exceed their limit mid-request (e.g., during a long tool-use chain)?</h3>
+            <p>Reserve an estimated credit budget before the call starts, cap it at <code>maxCreditsPerRequest</code>, and hard-stop the chain if the reservation is exhausted — don't let a single request go uncapped even for paying tiers, or one runaway agent loop can wipe out your margin on that user for the month.</p>
+            <h3>Is Redis or MongoDB better for tracking real-time credit balances?</h3>
+            <p>Redis for the hot path (checking/decrementing balance on every request — sub-millisecond reads), MongoDB for the source-of-truth ledger (usage logs, monthly resets, billing reconciliation). Sync Redis from MongoDB on a scheduled job, not the other way around.</p>
+
+            <p>Need help architecting a billing system for your AI product? <a href="../services.html">View my SaaS development services</a> or <a href="../contact.html">contact me</a> — I build credit-based billing, usage metering, and LLM cost optimization for SaaS founders.</p>
+          </div>
+          <footer class="blog-article-actions">
+            <a href="index.html" class="btn-cmd no-arrow">← Back to Blog</a>
+            <a href="../contact.html" class="btn-cmd btn-cmd--primary no-arrow">Hire Me for Your Project</a>
+          </footer>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="terminal footer-terminal">
+        <div class="terminal-titlebar">
+          <div class="terminal-dots">
+            <span class="dot-red"></span>
+            <span class="dot-amber"></span>
+            <span class="dot-green"></span>
+          </div>
+          <span class="terminal-title">footer.sh  ~/abubakkar</span>
+        </div>
+        <div class="terminal-body footer-body">
+          <div class="footer-grid">
+            <div class="footer-col footer-brand">
+              <p class="footer-logo">➜ ~/abubakkar</p>
+              <p class="footer-tagline">Full-stack developer building SaaS, APIs &amp; AI products from Lahore, Pakistan.</p>
+              <p class="footer-meta"><span class="footer-status">●</span> Open to remote &amp; freelance</p>
+            </div>
+            <nav class="footer-col" aria-label="Footer navigation">
+              <h3 class="footer-heading">Pages</h3>
+              <ul class="footer-links">
+                <li><a href="../index.html" class="no-arrow">home</a></li>
+                <li><a href="../about.html" class="no-arrow">about</a></li>
+                <li><a href="../skills.html" class="no-arrow">skills</a></li>
+                <li><a href="../projects.html" class="no-arrow">projects</a></li>
+                <li><a href="../services.html" class="no-arrow">services</a></li>
+                <li><a href="../experience.html" class="no-arrow">experience</a></li>
+                <li><a href="../reviews.html" class="no-arrow">reviews</a></li>
+                <li><a href="../blog/index.html" class="no-arrow">blog</a></li>
+                <li><a href="../contact.html" class="no-arrow">contact</a></li>
+              </ul>
+            </nav>
+            <div class="footer-col">
+              <h3 class="footer-heading">Contact</h3>
+              <ul class="footer-links">
+                <li><a href="mailto:hello@abubakkar.dev" class="no-arrow">hello@abubakkar.dev</a></li>
+                <li><a href="tel:+923241851476" class="no-arrow">+92 324 1851476</a></li>
+                <li><a href="../contact.html" class="no-arrow">Get in touch →</a></li>
+                <li><a href="../assets/cv.pdf" class="no-arrow" target="_blank" rel="noopener">Download CV</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h3 class="footer-heading">Connect</h3>
+              <div class="footer-socials">
+                <a href="https://github.com/Innocent-Developer" class="footer-social-chip no-arrow" target="_blank" rel="me noopener" aria-label="GitHub">GitHub</a>
+                <a href="https://www.linkedin.com/in/mughal-abubakkar" class="footer-social-chip no-arrow" target="_blank" rel="me noopener" aria-label="LinkedIn">LinkedIn</a>
+                <a href="https://www.instagram.com/dev_abubakkar/" class="footer-social-chip no-arrow" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
+                <a href="mailto:hello@abubakkar.dev" class="footer-social-chip no-arrow" aria-label="Email">Email</a>
+              </div>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p class="footer-copy">© 2026 Abubakkar Sajid · Built with HTML, CSS &amp; JS</p>
+            <a href="#" class="back-to-top no-arrow">▲ back to top</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <div class="toast" data-toast role="status" aria-live="polite">
+    <span class="toast-message" data-toast-message></span>
+    <button type="button" class="toast-dismiss">[dismiss]</button>
+  </div>
+  <script src="../js/terminal.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</body>
+</html>

@@ -1,40 +1,35 @@
-# Abubakkar Sajid
+# Abubakkar Sajid - Full-Stack & Backend Developer
 
-> Abubakkar Sajid is a full-stack developer based in Lahore, Pakistan, with 3+ years of experience building production web applications, SaaS platforms, backend APIs, and AI-powered chatbots. Core stack: Node.js, Express.js, FastAPI, React, Next.js, TypeScript, Python, MongoDB, and Redis, with Linux VPS administration and AI integration (Gemini, OpenAI, Claude). He currently works as a Product Developer at Triad Labz and is available for remote and freelance projects worldwide. Contact: abubakkarsajid4@gmail.com.
+> Full-stack developer in Lahore, Pakistan with 3+ years shipping production
+> SaaS, backend APIs and AI chatbots. Open to remote, freelance and contract
+> work worldwide. Typical reply time: within 24 hours. Timezone: UTC+5.
 
-Also known as: Abu Bakkar Sajid, Innocent-Developer (GitHub), abubakkar.dev (Instagram).
+## Services
+- Backend & API development: Node.js, Express, FastAPI, REST, WebSockets, auth
+- SaaS product development: billing, dashboards, admin panels, end-to-end
+- WhatsApp AI chatbots: WhatsApp Business API + Gemini/OpenAI/Claude
+- Web & mobile UI: React, Next.js, TypeScript
+- Servers & DevOps: Linux VPS, Nginx, SSL/TLS, Docker, CI/CD
+
+## Selected work
+- [ForiSay](https://forisay.com): AI WhatsApp chatbot platform - 24/7 auto-replies
+  for e-commerce, real estate and lead capture. Built at Triad Labz.
+- [API Test Lab](https://apitestlab.org): SaaS for API testing, load testing and
+  monitoring with Stripe billing. Built solo.
+- [Madadgaar](https://madadgaar.com.pk): property, loans & insurance marketplace
+  with verified experts across Pakistan.
 
 ## Pages
-
-- [Home](https://www.abubakkar.dev/): Overview  full-stack developer and backend engineer in Lahore, Pakistan
-- [About](https://www.abubakkar.dev/about.html): Background, education (BSCS, Lahore Leads University), and certifications (Full-Stack Development, Cyber Security, AI Engineering & Automation)
-- [Skills](https://www.abubakkar.dev/skills.html): Complete tech stack  languages, frontend, backend, databases, DevOps, AI & automation
-- [Projects](https://www.abubakkar.dev/projects.html): Live production projects with links and tech details
-- [Services](https://www.abubakkar.dev/services.html): Backend/API development, SaaS builds, AI chatbots, DevOps, automation  for hire
-- [Experience](https://www.abubakkar.dev/experience.html): Work history from 2021 to present, including team lead roles
-- [Reviews](https://www.abubakkar.dev/reviews.html): Client testimonials
-- [Contact](https://www.abubakkar.dev/contact.html): Email, phone, and contact form  replies within 24 hours
-
-## Projects
-
-- [ForiSay](https://www.forisay.com): AI-powered WhatsApp chatbot that auto-replies to customer messages 24/7 via the WhatsApp Business API. Built for e-commerce, real estate, and service businesses. Developed at Triad Labz.
-- [API Test Lab](https://www.apitestlab.org): SaaS platform for API testing, load testing, and real-time monitoring with Stripe billing. Built solo from concept to production.
-- [Madadgaar](https://www.madadgaar.com.pk): Live service marketplace connecting users with verified experts across Pakistan. Abubakkar built the backend APIs, real-time messaging, and manages the Linux VPS infrastructure.
-- EchoRead: Online books platform with a companion mobile app  backend architecture and APIs.
-
-## Experience Summary
-
-- Product Developer, Triad Labz (May 2026–Present)
-- Development Team Lead & Backend Developer, Madadgaar Expert Partner (Nov 2025–Present)
-- Product Manager & Full Stack Engineer, Code-XA Official (Jan 2025–Present)
-- Backend Developer, Echo Reads Pvt Ltd (Jul 2025–Jan 2026)
-- Full Stack Developer, MI-Networks (2024–2025)
-- Earlier: Onestwork (internship), Jalsonic Networks (frontend internship)
+- [About](https://www.abubakkar.dev/about.html): background, certifications, education
+- [Services](https://www.abubakkar.dev/services.html): what I build and how engagements work
+- [Projects](https://www.abubakkar.dev/projects.html): 20+ shipped projects, 7+ SaaS products
+- [Experience](https://www.abubakkar.dev/experience.html): 10 roles, 3+ years in production
+- [Blog](https://www.abubakkar.dev/blog/index.html): Node.js, SaaS & chatbot tutorials
+- [Contact](https://www.abubakkar.dev/contact.html): email, phone, contact form
 
 ## Contact
-
-- Email: abubakkarsajid4@gmail.com
 - Website: https://www.abubakkar.dev
+- Email: hello@abubakkar.dev
+- Phone: +92 324 1851476
 - GitHub: https://github.com/Innocent-Developer
-- Instagram: https://www.instagram.com/abubakkar.dev/
-- Location: Lahore, Punjab, Pakistan (works globally, remote-friendly)
+- LinkedIn: https://www.linkedin.com/in/mughal-abubakkar

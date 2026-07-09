@@ -2,127 +2,127 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.abubakkar.dev/</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.abubakkar.dev/projects.html</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.abubakkar.dev/services.html</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
     <loc>https://www.abubakkar.dev/about.html</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.abubakkar.dev/services.html</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.abubakkar.dev/projects.html</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://www.abubakkar.dev/skills.html</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.abubakkar.dev/experience.html</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.abubakkar.dev/reviews.html</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.abubakkar.dev/contact.html</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.abubakkar.dev/blog/</loc>
-    <lastmod>2026-07-06</lastmod>
+    <loc>https://www.abubakkar.dev/blog/index.html</loc>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.abubakkar.dev/contact.html</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.abubakkar.dev/blog/creating-responsive-portfolio-website.html</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.abubakkar.dev/blog/mern-stack-guide.html</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.abubakkar.dev/blog/react-ui-optimization.html</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.abubakkar.dev/blog/deploying-full-stack-vercel-aws.html</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.abubakkar.dev/blog/latest-trends-full-stack-2026.html</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.abubakkar.dev/blog/understanding-restful-apis.html</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.abubakkar.dev/blog/blockchain-basics-for-developers.html</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.abubakkar.dev/blog/ai-in-web-development-2026.html</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.abubakkar.dev/blog/cybersecurity-basics-for-developers.html</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.abubakkar.dev/blog/linux-for-developers-essentials.html</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.abubakkar.dev/blog/what-is-saas-complete-guide.html</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.abubakkar.dev/blog/backend-development-2025.html</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

@@ -52,24 +52,41 @@
     var mobileNav = document.querySelector('.nav-mobile');
     if (!toggle || !mobileNav) return;
 
+    var overlay = document.createElement('div');
+    overlay.className = 'nav-overlay';
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(overlay);
+
+    function setOpen(isOpen) {
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+      mobileNav.classList.toggle('open', isOpen);
+      overlay.classList.toggle('open', isOpen);
+      overlay.setAttribute('aria-hidden', String(!isOpen));
+      document.body.classList.toggle('menu-open', isOpen);
+    }
+
+    function closeMenu() {
+      setOpen(false);
+    }
+
     toggle.addEventListener('click', function () {
       var expanded = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!expanded));
-      mobileNav.classList.toggle('open', !expanded);
+      setOpen(!expanded);
     });
 
+    overlay.addEventListener('click', closeMenu);
+
     mobileNav.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        toggle.setAttribute('aria-expanded', 'false');
-        mobileNav.classList.remove('open');
-      });
+      link.addEventListener('click', closeMenu);
     });
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        toggle.setAttribute('aria-expanded', 'false');
-        mobileNav.classList.remove('open');
-      }
+      if (e.key === 'Escape') closeMenu();
+    });
+
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 1100) closeMenu();
     });
   }
 
@@ -127,6 +144,9 @@
       { type: 'blank', text: '' },
       { type: 'command', text: '➜ ~ cat /etc/profile' },
       { type: 'output', text: 'Full-Stack Developer · Backend & SaaS Builder' },
+      { type: 'blank', text: '' },
+      { type: 'command', text: '➜ ~ ./abubakkar --stats' },
+      { type: 'output', text: '20+ projects shipped · 7+ SaaS/products built · 3+ years production' },
       { type: 'blank', text: '' },
       { type: 'command', text: '➜ ~ ./abubakkar --location' },
       { type: 'output', text: 'Lahore, Pakistan | Open to Remote & Freelance' },

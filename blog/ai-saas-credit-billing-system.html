@@ -152,11 +152,11 @@
               <span class="blog-read-time">9 min read</span>
             </div>
             <h1 id="article-title" class="blog-article-title">Building a Credit-Based Billing System for AI SaaS Apps</h1>
-            <p class="blog-excerpt">How to design token-based billing for LLM-powered SaaS products — plan tiers, cost math, and the edge cases that break production.</p>
+            <p class="blog-excerpt">How to design token-based billing for LLM-powered SaaS products  plan tiers, cost math, and the edge cases that break production.</p>
             <p class="blog-author">By <a href="../about.html">Abubakkar Sajid</a> · Full Stack Developer</p>
           </header>
           <div class="blog-prose">
-            <p>Most tutorials on AI SaaS billing stop at "charge per API call." That breaks the moment you have multiple LLM providers, embedding costs, and tiered plans with different markup ratios. This guide covers the actual architecture — and the production bugs I found and fixed — while building a credit system for a RAG (Retrieval-Augmented Generation) application.</p>
+            <p>Most tutorials on AI SaaS billing stop at "charge per API call." That breaks the moment you have multiple LLM providers, embedding costs, and tiered plans with different markup ratios. This guide covers the actual architecture  and the production bugs I found and fixed  while building a credit system for a RAG (Retrieval-Augmented Generation) application.</p>
 
             <h2>Why Per-Call Billing Doesn't Work</h2>
             <p>LLM cost isn't flat. A single request can consume:</p>
@@ -185,7 +185,7 @@ const usageLogSchema = new mongoose.Schema({
 usageLogSchema.index({ userId: 1, createdAt: -1 });</code></pre>
 
             <h2>2. The <code>creditConfig.js</code> Pattern (and Its Bugs)</h2>
-            <p>Centralize your pricing logic in one config file — never scatter cost math across routes. Here's the pattern, along with five bugs that commonly slip into production versions of this exact file:</p>
+            <p>Centralize your pricing logic in one config file  never scatter cost math across routes. Here's the pattern, along with five bugs that commonly slip into production versions of this exact file:</p>
             <pre><code>// config/creditConfig.js
 const PLAN_LIMITS = {
   free: { monthlyCredits: 100, maxCreditsPerRequest: 5 },
@@ -215,7 +215,7 @@ module.exports = { PLAN_LIMITS, TOKENS_PER_CREDIT, tokensToCredits };</code></pr
             </ol>
 
             <h2>3. Enforcing Limits Before the LLM Call</h2>
-            <p>Check and reserve credits <em>before</em> calling the provider API — not after — or a slow user can burn through their limit with concurrent requests before the deduction lands:</p>
+            <p>Check and reserve credits <em>before</em> calling the provider API  not after  or a slow user can burn through their limit with concurrent requests before the deduction lands:</p>
             <pre><code>// middleware/checkCredits.js
 const User = require("../models/User");
 const { PLAN_LIMITS } = require("../config/creditConfig");
@@ -232,13 +232,13 @@ async function checkCredits(req, res, next) {
     });
   }
 
-  // Optimistic reservation — reconcile actual cost after the LLM response
+  // Optimistic reservation  reconcile actual cost after the LLM response
   req.creditReservation = Math.min(limit.maxCreditsPerRequest, limit.monthlyCredits - user.creditsUsedThisMonth);
   next();
 }
 
 module.exports = checkCredits;</code></pre>
-            <p>Reconcile the reservation with actual token usage in the response handler, and use <code>findOneAndUpdate</code> with <code>$inc</code> for atomic credit deduction — never read-modify-write on the user document, which race-conditions under concurrent requests.</p>
+            <p>Reconcile the reservation with actual token usage in the response handler, and use <code>findOneAndUpdate</code> with <code>$inc</code> for atomic credit deduction  never read-modify-write on the user document, which race-conditions under concurrent requests.</p>
 
             <h2>4. Cost Analysis Before You Set Prices</h2>
             <p>Before launching a plan, model your margin per tier using real provider pricing:</p>
@@ -280,17 +280,17 @@ module.exports = checkCredits;</code></pre>
                 </tr>
               </tbody>
             </table>
-            <p>Run this analysis per-provider (Gemini Flash-Lite, GPT-4o-mini, Claude Haiku) since embedding and inference pricing shifts frequently — hard-coding a single provider's rates into your margin model is a common mistake when providers update pricing without notice.</p>
+            <p>Run this analysis per-provider (Gemini Flash-Lite, GPT-4o-mini, Claude Haiku) since embedding and inference pricing shifts frequently  hard-coding a single provider's rates into your margin model is a common mistake when providers update pricing without notice.</p>
 
             <h2>FAQ: AI SaaS Billing Systems</h2>
             <h3>Should I bill by tokens or by requests?</h3>
             <p>Tokens. Request-based billing works only if every request has near-identical cost, which isn't true once you support multiple models, tool calls, or RAG retrieval steps.</p>
             <h3>How do I handle users who exceed their limit mid-request (e.g., during a long tool-use chain)?</h3>
-            <p>Reserve an estimated credit budget before the call starts, cap it at <code>maxCreditsPerRequest</code>, and hard-stop the chain if the reservation is exhausted — don't let a single request go uncapped even for paying tiers, or one runaway agent loop can wipe out your margin on that user for the month.</p>
+            <p>Reserve an estimated credit budget before the call starts, cap it at <code>maxCreditsPerRequest</code>, and hard-stop the chain if the reservation is exhausted  don't let a single request go uncapped even for paying tiers, or one runaway agent loop can wipe out your margin on that user for the month.</p>
             <h3>Is Redis or MongoDB better for tracking real-time credit balances?</h3>
-            <p>Redis for the hot path (checking/decrementing balance on every request — sub-millisecond reads), MongoDB for the source-of-truth ledger (usage logs, monthly resets, billing reconciliation). Sync Redis from MongoDB on a scheduled job, not the other way around.</p>
+            <p>Redis for the hot path (checking/decrementing balance on every request  sub-millisecond reads), MongoDB for the source-of-truth ledger (usage logs, monthly resets, billing reconciliation). Sync Redis from MongoDB on a scheduled job, not the other way around.</p>
 
-            <p>Need help architecting a billing system for your AI product? <a href="../services.html">View my SaaS development services</a> or <a href="../contact.html">contact me</a> — I build credit-based billing, usage metering, and LLM cost optimization for SaaS founders.</p>
+            <p>Need help architecting a billing system for your AI product? <a href="../services.html">View my SaaS development services</a> or <a href="../contact.html">contact me</a>  I build credit-based billing, usage metering, and LLM cost optimization for SaaS founders.</p>
           </div>
           <footer class="blog-article-actions">
             <a href="index.html" class="btn-cmd no-arrow">← Back to Blog</a>

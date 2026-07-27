@@ -50,19 +50,14 @@
   function initMobileMenu() {
     var toggle = document.querySelector('.menu-toggle');
     var mobileNav = document.querySelector('.nav-mobile');
+    var header = document.querySelector('.site-header');
     if (!toggle || !mobileNav) return;
-
-    var overlay = document.createElement('div');
-    overlay.className = 'nav-overlay';
-    overlay.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(overlay);
 
     function setOpen(isOpen) {
       toggle.setAttribute('aria-expanded', String(isOpen));
       toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+      toggle.textContent = isOpen ? '[×]' : '[≡]';
       mobileNav.classList.toggle('open', isOpen);
-      overlay.classList.toggle('open', isOpen);
-      overlay.setAttribute('aria-hidden', String(!isOpen));
       document.body.classList.toggle('menu-open', isOpen);
     }
 
@@ -70,15 +65,20 @@
       setOpen(false);
     }
 
-    toggle.addEventListener('click', function () {
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
       var expanded = toggle.getAttribute('aria-expanded') === 'true';
       setOpen(!expanded);
     });
 
-    overlay.addEventListener('click', closeMenu);
-
     mobileNav.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!mobileNav.classList.contains('open')) return;
+      if (header && header.contains(e.target)) return;
+      closeMenu();
     });
 
     document.addEventListener('keydown', function (e) {
@@ -160,9 +160,11 @@
       {
         type: 'html',
         text:
-          '➜ ~ <a href="assets/cv.pdf" class="btn-cmd btn-cmd--primary no-arrow" target="_blank" rel="noopener">[ Open Resume ]</a>   ' +
-          '<a href="https://www.linkedin.com/in/mughal-abubakkar" target="_blank" rel="noopener">linkedin.com/in/abubakkar</a>   ' +
-          '<a href="https://github.com/Innocent-Developer" target="_blank" rel="noopener">github.com/Innocent-Developer</a>',
+          '<span class="hero-actions-line">' +
+          '<a href="assets/cv.pdf" class="btn-cmd btn-cmd--primary no-arrow" target="_blank" rel="noopener">[ Open Resume ]</a>' +
+          '<a href="https://www.linkedin.com/in/mughal-abubakkar" class="no-arrow" target="_blank" rel="noopener">LinkedIn</a>' +
+          '<a href="https://github.com/Innocent-Developer" class="no-arrow" target="_blank" rel="noopener">GitHub</a>' +
+          '</span>',
         delay: 400
       }
     ];
@@ -429,6 +431,133 @@
     });
   }
 
+  /* ===== Profile dashview (ASCII convert animation) ===== */
+  function initProfilePreview() {
+    var out = document.querySelector('[data-profile-ascii]');
+    var status = document.querySelector('[data-profile-status]');
+    var srcImg = document.querySelector('[data-profile-src]');
+    if (!out || !srcImg) return;
+
+    // Light → dark ramp (dash-heavy terminal look)
+    var RAMP = '  ..--==++**##%%@@';
+
+    function brightness(r, g, b) {
+      return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    }
+
+    function imageToLines(img, cols, rows) {
+      var canvas = document.createElement('canvas');
+      canvas.width = cols;
+      canvas.height = rows;
+      var ctx = canvas.getContext('2d', { willReadFrequently: true });
+      if (!ctx) return [];
+
+      var iw = img.naturalWidth || img.width;
+      var ih = img.naturalHeight || img.height;
+      // Cover-crop, bias up slightly for face
+      var scale = Math.max(cols / iw, rows / ih);
+      var sw = cols / scale;
+      var sh = rows / scale;
+      var sx = (iw - sw) / 2;
+      var sy = Math.max(0, (ih - sh) * 0.12);
+
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.fillStyle = '#0A0E0D';
+      ctx.fillRect(0, 0, cols, rows);
+      ctx.drawImage(img, sx, sy, sw, sh, 0, 0, cols, rows);
+
+      var data = ctx.getImageData(0, 0, cols, rows).data;
+      var vals = new Float32Array(cols * rows);
+      var min = 1;
+      var max = 0;
+      var y;
+      var x;
+      var idx;
+      var b;
+
+      for (y = 0; y < rows; y++) {
+        for (x = 0; x < cols; x++) {
+          idx = (y * cols + x) * 4;
+          // Invert: dark features → dense chars
+          b = 1 - brightness(data[idx], data[idx + 1], data[idx + 2]);
+          vals[y * cols + x] = b;
+          if (b < min) min = b;
+          if (b > max) max = b;
+        }
+      }
+
+      var range = Math.max(0.08, max - min);
+      var lines = [];
+      var t;
+      var ch;
+
+      for (y = 0; y < rows; y++) {
+        var row = '';
+        for (x = 0; x < cols; x++) {
+          t = (vals[y * cols + x] - min) / range;
+          // Mild contrast curve so face edges read clearly
+          t = Math.pow(Math.min(1, Math.max(0, t)), 0.85);
+          ch = RAMP[Math.min(RAMP.length - 1, Math.floor(t * (RAMP.length - 1)))];
+          row += ch;
+        }
+        lines.push(row);
+      }
+      return lines;
+    }
+
+    function render(lines) {
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduced) {
+        out.textContent = lines.join('\n');
+        if (status) status.textContent = '✔ rendered dashview · ' + lines[0].length + '×' + lines.length;
+        return;
+      }
+
+      var i = 0;
+      out.textContent = '';
+      function step() {
+        if (i >= lines.length) {
+          if (status) status.textContent = '✔ rendered dashview · ' + lines[0].length + '×' + lines.length;
+          return;
+        }
+        out.textContent += (i ? '\n' : '') + lines[i];
+        i += 1;
+        window.setTimeout(step, 12);
+      }
+      step();
+    }
+
+    function run() {
+      window.requestAnimationFrame(function () {
+        var pane = out.closest('.hero-ascii-pane');
+        var paneW = pane && pane.clientWidth > 40 ? pane.clientWidth - 28 : 320;
+        var w = window.innerWidth;
+        // Fit largest readable grid into the pane (~0.6em char width)
+        var cols = Math.max(44, Math.min(w < 480 ? 54 : 72, Math.floor(paneW / 5.2)));
+        var rows = Math.round(cols * 0.58);
+        var fontPx = Math.max(7, Math.min(11, paneW / cols));
+        out.style.fontSize = fontPx + 'px';
+        var lines = imageToLines(srcImg, cols, rows);
+        if (!lines.length) {
+          if (status) status.textContent = '✘ error: could not convert image';
+          return;
+        }
+        render(lines);
+      });
+    }
+
+    if (srcImg.complete && srcImg.naturalWidth) {
+      run();
+    } else {
+      srcImg.addEventListener('load', run);
+      srcImg.addEventListener('error', function () {
+        if (status) status.textContent = '✘ error: profile.png not found';
+        out.textContent = '[ image missing ]';
+      });
+    }
+  }
+
   /* ===== Init ===== */
   document.addEventListener('DOMContentLoaded', function () {
     initActiveNav();
@@ -436,6 +565,7 @@
     initBootLines();
     initScrollReveals();
     initHomeHero();
+    initProfilePreview();
     initDailyCipher();
     initAskScroll();
     toastApi = initToast();

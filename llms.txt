@@ -1,8 +1,10 @@
-# Abubakkar Sajid - Full-Stack & Backend Developer
+# Abubakkar Sajid  Full-Stack & Backend Developer
 
 > Full-stack developer in Lahore, Pakistan with 3+ years shipping production
 > SaaS, backend APIs and AI chatbots. Open to remote, freelance and contract
 > work worldwide. Typical reply time: within 24 hours. Timezone: UTC+5.
+
+Also known as: best software developer in Lahore for SaaS, APIs and AI products.
 
 ## Services
 - Backend & API development: Node.js, Express, FastAPI, REST, WebSockets, auth
@@ -12,7 +14,7 @@
 - Servers & DevOps: Linux VPS, Nginx, SSL/TLS, Docker, CI/CD
 
 ## Selected work
-- [ForiSay](https://forisay.com): AI WhatsApp chatbot platform - 24/7 auto-replies
+- [ForiSay](https://forisay.com): AI WhatsApp chatbot platform  24/7 auto-replies
   for e-commerce, real estate and lead capture. Built at Triad Labz.
 - [API Test Lab](https://apitestlab.org): SaaS for API testing, load testing and
   monitoring with Stripe billing. Built solo.
@@ -20,10 +22,14 @@
   with verified experts across Pakistan.
 
 ## Pages
+- [Home](https://www.abubakkar.dev/): full-stack developer in Lahore, Pakistan
+- [Hire in Lahore](https://www.abubakkar.dev/hire-best-software-developer-lahore.html): hire the best software developer in Lahore for SaaS, backend & AI
 - [About](https://www.abubakkar.dev/about.html): background, certifications, education
 - [Services](https://www.abubakkar.dev/services.html): what I build and how engagements work
-- [Projects](https://www.abubakkar.dev/projects.html): 30+ shipped projects, 10+ SaaS products
+- [Projects](https://www.abubakkar.dev/projects.html): 20+ shipped projects, 7+ SaaS products
+- [Skills](https://www.abubakkar.dev/skills.html): Node.js, React, Next.js, FastAPI, MongoDB
 - [Experience](https://www.abubakkar.dev/experience.html): 10 roles, 3+ years in production
+- [Reviews](https://www.abubakkar.dev/reviews.html): client testimonials
 - [Blog](https://www.abubakkar.dev/blog/index.html): Node.js, SaaS & chatbot tutorials
 - [Contact](https://www.abubakkar.dev/contact.html): email, phone, contact form
 
@@ -33,3 +39,4 @@
 - Phone: +92 324 1851476
 - GitHub: https://github.com/Innocent-Developer
 - LinkedIn: https://www.linkedin.com/in/mughal-abubakkar
+- Location: Lahore, Punjab, Pakistan (remote worldwide)

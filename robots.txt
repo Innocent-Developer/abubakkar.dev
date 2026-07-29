@@ -1,9 +1,14 @@
-# robots.txt - abubakkar.dev
+# robots.txt - https://www.abubakkar.dev
 User-agent: *
 Allow: /
+Disallow: /og-template.html
+Disallow: /faq-section.html
+Disallow: /scripts/
 
-# AI assistants & answer engines - welcome
+# AI assistants & answer engines
 User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
 Allow: /
 User-agent: OAI-SearchBot
 Allow: /
@@ -15,5 +20,14 @@ User-agent: PerplexityBot
 Allow: /
 User-agent: Google-Extended
 Allow: /
+User-agent: Applebot-Extended
+Allow: /
+User-agent: Bytespider
+Allow: /
+User-agent: CCBot
+Allow: /
+
+# Host hint for crawlers
+Host: https://www.abubakkar.dev
 
 Sitemap: https://www.abubakkar.dev/sitemap.xml

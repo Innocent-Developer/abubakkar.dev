@@ -63,14 +63,14 @@ const PERSON_BLOCK = `  <script type="application/ld+json">\n${PERSON_JSON}\n  <
 
 const PAGE_META = {
   'index.html': {
-    title: 'Abubakkar Sajid  Full-Stack & Backend Developer in Lahore, Pakistan',
+    title: 'Abubakkar Sajid - Full-Stack & Backend Developer in Lahore, Pakistan',
     description:
-      'Abubakkar Sajid is a full-stack developer in Lahore, Pakistan with 3+ years shipping production SaaS, backend APIs & AI chatbots. Available for remote & freelance work.',
+      'Abubakkar Sajid is a full-stack & backend developer in Lahore, Pakistan with 3+ years shipping production SaaS, APIs & AI chatbots. Hire remote or freelance  among the best software developers in Pakistan.',
     canonical: 'https://www.abubakkar.dev/',
     ogType: 'website',
   },
   'about.html': {
-    title: 'About Abubakkar Sajid | Full-Stack Developer & SaaS Builder',
+    title: 'About Abubakkar Sajid | Full-Stack Developer in Lahore, Pakistan',
     description:
       'Meet Abubakkar Sajid  full-stack developer from Lahore with 3+ years in production apps, certified in cyber security & AI engineering. BSCS at Lahore Leads University.',
     canonical: 'https://www.abubakkar.dev/about.html',
@@ -86,14 +86,14 @@ const PAGE_META = {
   'projects.html': {
     title: 'Projects  SaaS, APIs & AI Chatbots Shipped Live | Abubakkar Sajid',
     description:
-      '30+ shipped projects including ForiSay (AI WhatsApp chatbot), API Test Lab (SaaS) & Madadgaar marketplace. Real products, live in production, built end to end.',
+      '30+ shipped projects including ForiSay (AI WhatsApp chatbot), API Test Lab, Pinstack & Madadgaar. Real products, live in production, built end to end in Pakistan.',
     canonical: 'https://www.abubakkar.dev/projects.html',
     ogType: 'website',
   },
   'services.html': {
-    title: 'Hire a Full-Stack Developer  Web, APIs & AI Chatbots | Abubakkar Sajid',
+    title: 'Hire a Backend & Full-Stack Developer in Lahore, Pakistan | Abubakkar Sajid',
     description:
-      'Hire Abubakkar Sajid for backend APIs, full SaaS builds, WhatsApp AI chatbots, and server/DevOps work. Remote & freelance worldwide from Lahore, Pakistan (UTC+5).',
+      'Hire a backend & full-stack developer in Lahore, Pakistan: Node.js APIs, full SaaS builds, WhatsApp AI chatbots & DevOps. Remote & freelance worldwide (UTC+5).',
     canonical: 'https://www.abubakkar.dev/services.html',
     ogType: 'website',
   },
@@ -112,9 +112,9 @@ const PAGE_META = {
     ogType: 'website',
   },
   'contact.html': {
-    title: 'Contact Abubakkar Sajid  Hire a Remote Full-Stack Developer',
+    title: 'Contact Abubakkar Sajid - Hire a Remote Developer in Pakistan',
     description:
-      'Get in touch to hire Abubakkar Sajid for remote, freelance or contract work  backend APIs, SaaS products, AI chatbots. Based in Lahore, replies within 24 hours.',
+      'Hire a remote full-stack developer in Pakistan: backend APIs, SaaS products, AI chatbots. Based in Lahore (UTC+5), freelance & contract, replies within 24 hours.',
     canonical: 'https://www.abubakkar.dev/contact.html',
     ogType: 'website',
   },

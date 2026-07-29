@@ -2016,6 +2016,35 @@ body.menu-open {
   content: none;
 }
 
+.footer-pinstack {
+  margin-top: 0.85rem;
+}
+
+.footer-pinstack-badge {
+  display: inline-block;
+  line-height: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  opacity: 0.92;
+  transition: opacity 0.2s, box-shadow 0.2s;
+}
+
+.footer-pinstack-badge:hover {
+  opacity: 1;
+  box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.35);
+}
+
+.footer-pinstack-badge::after {
+  content: none;
+}
+
+.footer-pinstack-badge img {
+  display: block;
+  width: min(250px, 100%);
+  height: auto;
+  border: 0;
+}
+
 .footer-bottom {
   display: flex;
   align-items: center;

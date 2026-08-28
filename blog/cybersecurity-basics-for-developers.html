@@ -13,28 +13,299 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cybersecurity Basics for Developers: Secure Your Apps | Abubakkar Sajid</title>
-  <meta name="description" content="Essential cybersecurity for developers: OWASP Top 10, secure auth, HTTPS, input validation, and secure deployment. Protect your web applications.">
+  <title>Cybersecurity Essentials for Full-Stack & Backend Developers | Abubakkar Sajid</title>
+  <meta name="description" content="Essential cybersecurity practices for web developers: OWASP Top 10 mitigation, secure JWT authentication, SQL/NoSQL injection defense, and CORS/CSP headers.">
   <link rel="canonical" href="https://www.abubakkar.dev/blog/cybersecurity-basics-for-developers.html">
   <link rel="alternate" type="text/plain" href="https://www.abubakkar.dev/llms.txt" title="LLM context file">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="author" content="Abubakkar Sajid">
   <meta name="theme-color" content="#0A0E0D">
-  <meta property="og:type" content="article">
-  <meta property="og:site_name" content="Abubakkar Sajid  Portfolio">
-  <meta property="og:title" content="Cybersecurity Basics for Developers: Secure Your Apps | Abubakkar Sajid">
-  <meta property="og:description" content="Essential cybersecurity for developers: OWASP Top 10, secure auth, HTTPS, input validation, and secure deployment. Protect your web applications.">
+    <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Abubakkar Sajid - Full-Stack & Backend Developer">
+  <meta property="og:title" content="Cybersecurity Essentials for Full-Stack & Backend Developers | Abubakkar Sajid">
+  <meta property="og:description" content="Essential cybersecurity practices for web developers: OWASP Top 10 mitigation, secure JWT authentication, SQL/NoSQL injection defense, and CORS/CSP headers.">
   <meta property="og:url" content="https://www.abubakkar.dev/blog/cybersecurity-basics-for-developers.html">
   <meta property="og:image" content="https://www.abubakkar.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Abubakkar Sajid - Full-Stack & Backend Developer Portfolio">
+  <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cybersecurity Essentials for Full-Stack & Backend Developers | Abubakkar Sajid">
+  <meta name="twitter:description" content="Essential cybersecurity practices for web developers: OWASP Top 10 mitigation, secure JWT authentication, SQL/NoSQL injection defense, and CORS/CSP headers.">
+  <meta name="twitter:image" content="https://www.abubakkar.dev/assets/og-image.png">
+  <meta name="twitter:creator" content="@abubakkar_dev">
+  <meta name="twitter:site" content="@abubakkar_dev">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230A0E0D'/%3E%3Ctext x='50' y='72' font-size='64' text-anchor='middle' fill='%2322C55E' font-family='monospace'%3E%E2%96%8A%3C/text%3E%3C/svg%3E">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" as="style">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
-  <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Article","headline":"Cybersecurity Basics for Developers: Secure Your Apps","description":"Essential cybersecurity for developers: OWASP, secure auth, and deployment.","url":"https://www.abubakkar.dev/blog/cybersecurity-basics-for-developers.html","datePublished":"2025-02-13","dateModified":"2025-02-13","author":{"@type":"Person","name":"Abubakkar Sajid","url":"https://www.abubakkar.dev/"},"publisher":{"@type":"Person","name":"Abubakkar Sajid","url":"https://www.abubakkar.dev/"},"inLanguage":"en-US"}
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://www.abubakkar.dev/#person",
+      "name": "Abubakkar Sajid",
+      "alternateName": [
+        "Abu Bakkar Sajid",
+        "Innocent-Developer",
+        "abubakkar.dev",
+        "Mughal Abubakkar",
+        "Best Software Developer Lahore",
+        "Backend Developer Pakistan",
+        "Full-Stack Developer Lahore"
+      ],
+      "jobTitle": "Full-Stack Developer & Backend Engineer",
+      "description": "Abubakkar Sajid is an elite full-stack and backend developer based in Lahore, Pakistan with 3+ years of experience shipping 30+ production web applications, SaaS platforms, backend APIs, and AI-powered WhatsApp chatbots. Product Developer at Triad Labz and Team Lead at Madadgaar.",
+      "url": "https://www.abubakkar.dev/",
+      "image": "https://www.abubakkar.dev/assets/profile.png",
+      "email": "mailto:hello@abubakkar.dev",
+      "telephone": "+92-324-1851476",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Lahore",
+        "addressRegion": "Punjab",
+        "addressCountry": "PK"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "31.5204",
+        "longitude": "74.3587"
+      },
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Full-Stack Software Engineer",
+        "occupationLocation": {
+          "@type": "City",
+          "name": "Lahore"
+        },
+        "skills": "Node.js, TypeScript, React, Next.js, FastAPI, Python, MongoDB, Redis, Docker, Nginx, Linux, AI Integration, WhatsApp API, SaaS Architecture"
+      },
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Triad Labz",
+        "url": "https://www.triadlabz.com"
+      },
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Lahore Leads University"
+      },
+      "sameAs": [
+        "https://github.com/Innocent-Developer",
+        "https://www.linkedin.com/in/mughal-abubakkar",
+        "https://www.instagram.com/abubakkar.dev/",
+        "https://www.facebook.com/devabubakkarsajid",
+        "https://www.threads.com/@abubakkar.dev",
+        "https://pinstack.cc/product/abubakkar-sajid-full-stack-backend-saas-builder"
+      ],
+      "knowsAbout": [
+        "Node.js",
+        "Express.js",
+        "FastAPI",
+        "React",
+        "Next.js",
+        "TypeScript",
+        "JavaScript",
+        "Python",
+        "PHP",
+        "MongoDB",
+        "Redis",
+        "Docker",
+        "Nginx",
+        "Linux Server Administration",
+        "REST API Design",
+        "WebSockets",
+        "WhatsApp Business API",
+        "AI Chatbots",
+        "AI Integration",
+        "n8n Automation",
+        "SaaS Development",
+        "Stripe Billing",
+        "CI/CD Pipelines",
+        "Microservices",
+        "Tailwind CSS",
+        "Cybersecurity",
+        "Full-Stack Web Development",
+        "Backend Engineering",
+        "Prompt Engineering",
+        "Cloud Deployment"
+      ],
+      "knowsLanguage": [
+        "English",
+        "Urdu",
+        "Punjabi"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.abubakkar.dev/#website",
+      "name": "Abubakkar Sajid - Full-Stack & Backend Developer Portfolio",
+      "alternateName": [
+        "abubakkar.dev",
+        "Best Software Developer Lahore",
+        "Backend Developer Pakistan",
+        "Hire Node.js Developer Pakistan"
+      ],
+      "url": "https://www.abubakkar.dev/",
+      "description": "Portfolio & technical engineering hub of Abubakkar Sajid  Full-Stack & Backend Developer in Lahore, Pakistan. Production SaaS, Node.js & FastAPI backends, and WhatsApp AI chatbots.",
+      "publisher": {
+        "@id": "https://www.abubakkar.dev/#person"
+      },
+      "inLanguage": "en",
+      "about": {
+        "@id": "https://www.abubakkar.dev/#person"
+      },
+      "keywords": [
+        "best software developer in Lahore",
+        "backend developer in Lahore",
+        "Node.js developer Pakistan",
+        "full-stack developer Pakistan",
+        "hire remote developer Pakistan",
+        "FastAPI developer Lahore",
+        "WhatsApp AI chatbot developer",
+        "SaaS builder Pakistan"
+      ]
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://www.abubakkar.dev/#localservice",
+      "name": "Abubakkar Sajid - Software & Backend Development Services",
+      "description": "Full-stack web application development, backend REST API engineering, custom SaaS building, WhatsApp AI chatbots, and Linux VPS DevOps services based in Lahore, Pakistan, available for worldwide remote client engagements.",
+      "url": "https://www.abubakkar.dev/",
+      "telephone": "+92-324-1851476",
+      "email": "mailto:hello@abubakkar.dev",
+      "image": "https://www.abubakkar.dev/assets/og-image.png",
+      "priceRange": "$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Lahore",
+        "addressRegion": "Punjab",
+        "addressCountry": "PK"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "31.5204",
+        "longitude": "74.3587"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "09:00",
+        "closes": "21:00"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Lahore"
+        },
+        {
+          "@type": "Country",
+          "name": "Pakistan"
+        },
+        {
+          "@type": "Country",
+          "name": "United States"
+        },
+        {
+          "@type": "Country",
+          "name": "United Kingdom"
+        },
+        {
+          "@type": "Country",
+          "name": "Canada"
+        },
+        {
+          "@type": "Country",
+          "name": "United Arab Emirates"
+        },
+        {
+          "@type": "Country",
+          "name": "Germany"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Worldwide Remote"
+        }
+      ],
+      "serviceType": [
+        "Full-Stack Web Application Development",
+        "Backend & REST API Engineering",
+        "SaaS Product Architecture & Development",
+        "WhatsApp AI Chatbot Engineering",
+        "Linux Server Administration & DevOps Deployment",
+        "n8n Workflow Automation"
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://www.abubakkar.dev/blog/cybersecurity-basics-for-developers.html#techarticle",
+      "url": "https://www.abubakkar.dev/blog/cybersecurity-basics-for-developers.html",
+      "name": "Essential Cybersecurity & API Protection for Web Developers",
+      "description": "Essential cybersecurity practices for web developers: OWASP Top 10 mitigation, secure JWT authentication, SQL/NoSQL injection defense, and CORS/CSP headers.",
+      "isPartOf": {
+        "@id": "https://www.abubakkar.dev/#website"
+      },
+      "about": {
+        "@id": "https://www.abubakkar.dev/#person"
+      },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.abubakkar.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://www.abubakkar.dev/blog/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Essential Cybersecurity & API Protection for Web Developers",
+          "item": "https://www.abubakkar.dev/blog/cybersecurity-basics-for-developers.html"
+        }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://www.abubakkar.dev/blog/cybersecurity-basics-for-developers.html#article",
+      "headline": "Essential Cybersecurity & API Protection for Web Developers",
+      "description": "Essential cybersecurity practices for web developers: OWASP Top 10 mitigation, secure JWT authentication, SQL/NoSQL injection defense, and CORS/CSP headers.",
+      "url": "https://www.abubakkar.dev/blog/cybersecurity-basics-for-developers.html",
+      "mainEntityOfPage": "https://www.abubakkar.dev/blog/cybersecurity-basics-for-developers.html",
+      "image": "https://www.abubakkar.dev/assets/og-image.png",
+      "datePublished": "2025-09-05",
+      "dateModified": "2026-08-28",
+      "author": {
+        "@id": "https://www.abubakkar.dev/#person"
+      },
+      "publisher": {
+        "@id": "https://www.abubakkar.dev/#person"
+      },
+      "inLanguage": "en",
+      "keywords": "cybersecurity for developers, OWASP security, JWT authentication security, API defense, secure Node.js",
+      "articleSection": "Software Engineering"
+    }
+  ]
+}
   </script>
   <script type="application/ld+json">
 {

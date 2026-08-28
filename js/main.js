@@ -506,9 +506,9 @@
       return lines;
     }
 
-    function render(lines) {
+    function render(lines, instant) {
       var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduced) {
+      if (reduced || instant) {
         out.textContent = lines.join('\n');
         if (status) status.textContent = '✔ rendered dashview · ' + lines[0].length + '×' + lines.length;
         return;
@@ -528,34 +528,44 @@
       step();
     }
 
-    function run() {
+    function run(instant) {
       window.requestAnimationFrame(function () {
         var pane = out.closest('.hero-ascii-pane');
         var paneW = pane && pane.clientWidth > 40 ? pane.clientWidth - 28 : 320;
         var w = window.innerWidth;
         // Fit largest readable grid into the pane (~0.6em char width)
-        var cols = Math.max(44, Math.min(w < 480 ? 54 : 72, Math.floor(paneW / 5.2)));
+        var cols = Math.max(38, Math.min(w < 480 ? (w < 360 ? 44 : 52) : 72, Math.floor(paneW / 5.2)));
         var rows = Math.round(cols * 0.58);
-        var fontPx = Math.max(7, Math.min(11, paneW / cols));
+        var fontPx = Math.max(5.5, Math.min(10.5, paneW / cols));
         out.style.fontSize = fontPx + 'px';
         var lines = imageToLines(srcImg, cols, rows);
         if (!lines.length) {
           if (status) status.textContent = '✘ error: could not convert image';
           return;
         }
-        render(lines);
+        render(lines, instant);
       });
     }
 
     if (srcImg.complete && srcImg.naturalWidth) {
-      run();
+      run(false);
     } else {
-      srcImg.addEventListener('load', run);
+      srcImg.addEventListener('load', function () { run(false); });
       srcImg.addEventListener('error', function () {
         if (status) status.textContent = '✘ error: profile.png not found';
         out.textContent = '[ image missing ]';
       });
     }
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        if (srcImg.complete && srcImg.naturalWidth) {
+          run(true);
+        }
+      }, 150);
+    });
   }
 
   /* ===== Init ===== */

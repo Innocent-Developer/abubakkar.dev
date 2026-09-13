@@ -46,6 +46,7 @@
 4. **Madadgaar** (https://madadgaar.com.pk): Property, loans, and insurance marketplace connecting verified real estate and financial experts across Pakistan. High-traffic Express & MongoDB backend.
 5. **Cost Segregation Tax Calculator**: AI SaaS tool for U.S. commercial property tax depreciation utilizing Gemini Vision AI and RS Means construction cost datasets.
 6. **Real-Time Chat Application**: High-concurrency chat platform featuring private/group messaging, user presence tracking, typing indicators, and file attachments via Socket.io.
+7. **envscan-cli** (https://www.npmjs.com/package/envscan-cli): Open-source Node.js CLI that audits .env files against the codebase; detects missing, undocumented, and unused environment variables; zero-config `npx envscan-cli`; CI/CD exit code 1 on missing vars. Source: https://github.com/Innocent-Developer/env-doctor
 
 ---
 

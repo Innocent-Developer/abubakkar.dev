@@ -1624,6 +1624,11 @@ body.menu-open {
   overflow-x: auto;
 }
 
+/* Keep About grid children inside the viewport while the JSON block scrolls. */
+.about-main .two-col > div {
+  min-width: 0;
+}
+
 .about-values {
   list-style: none;
   display: flex;

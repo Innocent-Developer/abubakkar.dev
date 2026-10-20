@@ -428,6 +428,7 @@
                     <p>Use JWT (JSON Web Tokens) or OAuth 2.0 for stateless auth. Store tokens securely (httpOnly cookies or secure storage). Validate tokens on every protected route. Use middleware to check roles and permissions. Never expose sensitive data in tokens.</p>
 
                     <h2>4. Security Best Practices</h2>
+                    <p>For a practical production checklist covering object-level access control, rate limits, webhook verification, and safe logging, see <a href="nodejs-api-security-best-practices.html">Node.js API security best practices</a>.</p>
                     <ul>
                         <li><strong>HTTPS</strong> – Always use TLS in production</li>
                         <li><strong>Input validation</strong> – Sanitize and validate all inputs (express-validator, Joi)</li>
@@ -443,8 +444,10 @@
                     <h2>6. Documentation</h2>
                     <p>Document your API with OpenAPI (Swagger) or Postman. Include endpoints, parameters, request/response examples, and error codes. Keep docs in sync with codeuse annotations or generate from code. Provide a sandbox or Postman collection for testing.</p>
 
-                    <h2>7. Performance</h2>
+                    <h2>7. Performance</h2><p>To connect API contracts with storage, testing and operation, continue with the <a href="backend-development-2025.html">backend development learning guide</a>. For usage-sensitive endpoints, the <a href="ai-saas-credit-billing-system.html">AI credit billing design</a> explains atomic reservations and idempotent settlement.</p>
                     <p>Use pagination for list endpoints. Add filtering and sorting via query params. Implement caching (Redis) for frequently accessed data. Use database indexes for queried fields. Consider compression (gzip) for responses.</p>
+
+                    <p>For a concrete TypeScript service layout built around feature modules and clear provider boundaries, continue with this <a href="nestjs-project-structure-scalable-apis.html">NestJS project structure guide</a>.</p>
 
                     <p>Need help designing or building RESTful APIs? <a href="../contact.html">Contact me</a>I build secure, scalable APIs for MERN and Node.js applications.</p>
                 </div>

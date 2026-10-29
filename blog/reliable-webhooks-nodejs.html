@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reliable Webhooks in Node.js: Retries, Queues &amp; Idempotency</title>
+  <meta name="description" content="Build bulletproof webhook ingestion in Node.js: raw payload signature verification, idempotency keys, background queue processing with BullMQ, and exponential backoff.">
+  <link rel="canonical" href="https://www.abubakkar.dev/blog/reliable-webhooks-nodejs.html">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Abubakkar Sajid">
+  <meta name="theme-color" content="#0A0E0D">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Abubakkar Sajid - Full-Stack &amp; Backend Developer">
+  <meta property="og:title" content="Reliable Webhooks in Node.js: Retries, Queues &amp; Idempotency">
+  <meta property="og:description" content="Build bulletproof webhook ingestion in Node.js: raw payload signature verification, idempotency keys, background queue processing with BullMQ, and exponential backoff.">
+  <meta property="og:url" content="https://www.abubakkar.dev/blog/reliable-webhooks-nodejs.html">
+  <meta property="og:image" content="https://www.abubakkar.dev/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Abubakkar Sajid developer portfolio">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Reliable Webhooks in Node.js: Retries, Queues &amp; Idempotency">
+  <meta name="twitter:description" content="Build bulletproof webhook ingestion in Node.js with signature verification, BullMQ, and idempotency.">
+  <meta name="twitter:image" content="https://www.abubakkar.dev/assets/og-image.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": "https://www.abubakkar.dev/blog/reliable-webhooks-nodejs.html#article",
+        "headline": "Reliable Webhooks in Node.js: Retries, Queues & Idempotency",
+        "description": "Build bulletproof webhook ingestion in Node.js: raw payload signature verification, idempotency keys, background queue processing with BullMQ, and exponential backoff.",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://www.abubakkar.dev/blog/reliable-webhooks-nodejs.html"
+        },
+        "url": "https://www.abubakkar.dev/blog/reliable-webhooks-nodejs.html",
+        "datePublished": "2026-10-23",
+        "dateModified": "2026-10-23",
+        "author": {
+          "@type": "Person",
+          "@id": "https://www.abubakkar.dev/#person",
+          "name": "Abubakkar Sajid",
+          "url": "https://www.abubakkar.dev/about.html"
+        },
+        "publisher": {
+          "@id": "https://www.abubakkar.dev/#person"
+        },
+        "image": "https://www.abubakkar.dev/assets/og-image.png",
+        "articleSection": "Backend Engineering",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.abubakkar.dev/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": "https://www.abubakkar.dev/blog/index.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Reliable Webhooks Node.js",
+            "item": "https://www.abubakkar.dev/blog/reliable-webhooks-nodejs.html"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo no-arrow">➜ ~/abubakkar</a>
+      <nav class="nav-desktop" aria-label="Main navigation">
+        <a href="../about.html" class="nav-link no-arrow">/about</a>
+        <a href="../skills.html" class="nav-link no-arrow">/skills</a>
+        <a href="../projects.html" class="nav-link no-arrow">/projects</a>
+        <a href="../services.html" class="nav-link no-arrow">/services</a>
+        <a href="../experience.html" class="nav-link no-arrow">/experience</a>
+        <a href="../reviews.html" class="nav-link no-arrow">/reviews</a>
+        <a href="index.html" class="nav-link no-arrow">/blog</a>
+        <a href="../contact.html" class="nav-link no-arrow">/contact</a>
+      </nav>
+      <div class="header-actions">
+        <a href="../contact.html" class="btn-cmd btn-cmd--primary btn-cmd--hire no-arrow">$ ./hire_me.sh<span class="btn-cursor">▊</span></a>
+        <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">[≡]</button>
+      </div>
+    </div>
+    <nav class="nav-mobile" aria-label="Mobile navigation">
+      <div class="nav-mobile-prompt">➜ ~ ls ~/pages</div>
+      <a href="../about.html">about.html</a>
+      <a href="../skills.html">skills.html</a>
+      <a href="../projects.html">projects.html</a>
+      <a href="../services.html">services.html</a>
+      <a href="../experience.html">experience.html</a>
+      <a href="../reviews.html">reviews.html</a>
+      <a href="index.html">blog/index.html</a>
+      <a href="../contact.html">contact.html</a>
+    </nav>
+  </header>
+
+  <main class="container page-main blog-article-main">
+    <section class="section" data-reveal>
+      <h2 class="section-heading">▤ blog <span class="comment">// Article</span></h2>
+      <div class="terminal blog-article-terminal">
+        <div class="terminal-titlebar">
+          <div class="terminal-dots">
+            <span class="dot-red"></span>
+            <span class="dot-amber"></span>
+            <span class="dot-green"></span>
+          </div>
+          <span class="terminal-title">cat article.md</span>
+        </div>
+        <div class="terminal-body blog-article-body">
+          <nav class="blog-breadcrumb" aria-label="Breadcrumb">
+            <a href="../index.html">Home</a> <span aria-hidden="true">/</span>
+            <a href="index.html">Blog</a> <span aria-hidden="true">/</span>
+            <span>Reliable Webhooks Node.js</span>
+          </nav>
+          <header class="blog-article-header">
+            <div class="blog-meta-row">
+              <span class="blog-meta">Node.js · Backend Systems · Oct 23, 2026</span>
+              <span class="blog-read-time">12 min read</span>
+            </div>
+            <h1 id="article-title" class="blog-article-title">Reliable Webhooks in Node.js: Retries, Queues &amp; Idempotency</h1>
+            <p class="blog-excerpt">Webhooks are the backbone of event-driven architectures, yet naive endpoints regularly drop events, double-charge customers, or crash under retry storms. Master production webhook ingestion in Node.js with raw signature verification, BullMQ background queues, and strict PostgreSQL idempotency.</p>
+            <p class="blog-author">By <a href="../about.html">Abubakkar Sajid</a> · Full Stack Developer</p>
+          </header>
+
+          <div class="blog-prose">
+            <p>In modern cloud systems, webhooks are the primary mechanism for asynchronous inter-service communication. Payment gateways like Stripe, communication APIs like Twilio or WhatsApp Business, and version control platforms like GitHub rely on HTTP POST webhooks to notify your backend of critical real-world events. When an invoice is paid, a subscription is upgraded, or an external AI model finishes a batch job, an incoming webhook notifies your application to execute business side effects.</p>
+            <p>However, treating a webhook endpoint like a standard synchronous REST route is an architectural anti-pattern. Webhooks operate across untrusted public networks where network drops, server restarts, downstream database delays, and provider retries are daily occurrences. If your handler takes longer than 2–3 seconds to respond, providers assume delivery failed and trigger automatic retry storms. Without strict <strong>idempotency controls</strong> and <strong>asynchronous background queues</strong>, your application will process duplicate events, double-credit user accounts, or exhaust its database connection pool.</p>
+            <p>In this comprehensive guide, we engineer an enterprise-grade webhook ingestion architecture in Node.js and TypeScript. We will cover <strong>raw body preservation for HMAC-SHA256 signature verification</strong>, <strong>immediate 202 Accepted acknowledgment</strong>, <strong>PostgreSQL idempotency tracking</strong>, <strong>background queue processing with BullMQ and Redis</strong>, and <strong>exponential backoff with jitter retry strategies</strong>. For background on queuing infrastructure, check our guide on <a href="redis-caching-nodejs-guide.html">Redis caching and scaling in Node.js</a> and our overview of <a href="nodejs-api-security-best-practices.html">Node.js API security best practices</a>.</p>
+
+            <h2>Why Webhooks Fail in Production</h2>
+            <p>Before implementing defensive controls, let us examine the common failure modes of naive webhook handlers:</p>
+            <ul>
+              <li><strong>Provider Timeouts:</strong> Most third-party platforms enforce strict HTTP timeouts (e.g., Stripe times out after 10–20 seconds; GitHub after 10 seconds; Slack after 3 seconds). If your handler performs database writes, sends customer emails, or triggers AI generations synchronously inside the HTTP handler, it will periodically time out, triggering repeated delivery attempts.</li>
+              <li><strong>Duplicate Deliveries:</strong> Webhook providers guarantee <em>at-least-once</em> delivery, not <em>exactly-once</em> delivery. Network latency or packet drops on acknowledgment responses mean your server will inevitably receive the exact same event multiple times.</li>
+              <li><strong>Out-of-Order Delivery:</strong> There is no guarantee that an <code>order.created</code> event will arrive before an <code>order.fulfilled</code> event. If network congestion delays the first event, the second may be processed first.</li>
+              <li><strong>JSON Mutation Bugs:</strong> Standard Express middleware (such as <code>express.json()</code>) parses and serializes request bodies into JavaScript objects. This alters whitespace, key ordering, or Unicode characters, completely invalidating cryptographic signature checks.</li>
+            </ul>
+
+            <h2>Step 1: Cryptographic Signature Verification with Raw Bodies</h2>
+            <p>Never process an incoming webhook without verifying its cryptographic signature. A publicly exposed webhook URL can be called by anyone; signature verification guarantees that the payload originated from the authentic provider and was not altered in transit.</p>
+            <p>Signature verification uses Hash-based Message Authentication Codes (HMAC-SHA256). The provider hashes the raw, unparsed payload using a shared secret and transmits the digest in an HTTP header (e.g., <code>Stripe-Signature</code> or <code>X-Hub-Signature-256</code>). Your server must compute the exact same hash using its private signing secret and compare them.</p>
+
+            <h3>Preserving the Raw Buffer in Express</h3>
+            <p>To verify the signature, you must have access to the exact raw request bytes before any JSON parsing occurs. Configure Express to capture the raw buffer:</p>
+            <pre><code>import express from "express";
+
+const app = express();
+
+// Capture raw body buffer specifically for the webhook endpoint
+app.use(
+  "/api/webhooks",
+  express.raw({
+    type: "application/json",
+    limit: "2mb" // Strictly bound body size to prevent memory exhaustion attacks
+  })
+);
+
+// Standard JSON parsing for the rest of your application routes
+app.use(express.json());</code></pre>
+
+            <h3>Verifying Signatures with Constant-Time Comparison</h3>
+            <p>When comparing cryptographic hashes, never use the standard equality operator (<code>===</code>). String comparison operators terminate early upon finding the first mismatched character, creating a timing attack vulnerability that allows attackers to iteratively guess valid signatures. Always use Node.js's native <code>crypto.timingSafeEqual()</code>:</p>
+            <pre><code>import crypto from "crypto";
+
+interface VerificationResult {
+  isValid: boolean;
+  error?: string;
+}
+
+export function verifyWebhookSignature(
+  rawPayload: Buffer,
+  signatureHeader: string | undefined,
+  secret: string,
+  toleranceSeconds: number = 300
+): VerificationResult {
+  if (!signatureHeader) {
+    return { isValid: false, error: "Missing signature header" };
+  }
+
+  // Parse header components: e.g., t=1729681200,v1=9f8a7c...
+  const parts = signatureHeader.split(",").reduce((acc, part) =&gt; {
+    const [key, val] = part.split("=");
+    if (key &amp;&amp; val) acc[key.trim()] = val.trim();
+    return acc;
+  }, {} as Record&lt;string, string&gt;);
+
+  const timestamp = parts["t"];
+  const expectedSignature = parts["v1"];
+
+  if (!timestamp || !expectedSignature) {
+    return { isValid: false, error: "Malformed signature header components" };
+  }
+
+  // 1. Prevent Replay Attacks: Enforce maximum timestamp age (e.g., 5 minutes)
+  const eventTime = parseInt(timestamp, 10);
+  const currentTime = Math.floor(Date.now() / 1000);
+  if (Math.abs(currentTime - eventTime) &gt; toleranceSeconds) {
+    return { isValid: false, error: "Timestamp outside tolerance window (replay attack)" };
+  }
+
+  // 2. Compute HMAC-SHA256 signature
+  const signedPayload = `${timestamp}.${rawPayload.toString("utf8")}`;
+  const computedSignature = crypto
+    .createHmac("sha256", secret)
+    .update(signedPayload, "utf8")
+    .digest("hex");
+
+  // 3. Constant-Time Buffer Comparison
+  const computedBuf = Buffer.from(computedSignature, "hex");
+  const expectedBuf = Buffer.from(expectedSignature, "hex");
+
+  if (computedBuf.length !== expectedBuf.length) {
+    return { isValid: false, error: "Signature length mismatch" };
+  }
+
+  const isMatch = crypto.timingSafeEqual(computedBuf, expectedBuf);
+  return {
+    isValid: isMatch,
+    error: isMatch ? undefined : "Invalid cryptographic signature"
+  };
+}</code></pre>
+
+            <h2>Step 2: The Two-Phase Ingestion Architecture</h2>
+            <p>To eliminate provider timeouts and protect system availability, decouple webhook ingestion into two distinct phases:</p>
+            <ol>
+              <li><strong>Synchronous Ingestion Phase (&lt; 200ms):</strong>
+                <ul>
+                  <li>Verify signature and timestamp.</li>
+                  <li>Extract the unique external event ID (e.g., <code>evt_3Mz4...</code>).</li>
+                  <li>Store the event payload in PostgreSQL with status <code>received</code>.</li>
+                  <li>Push a background processing job onto a Redis-backed queue.</li>
+                  <li>Immediately return <code>HTTP 202 Accepted</code> (or <code>200 OK</code>) to the provider.</li>
+                </ul>
+              </li>
+              <li><strong>Asynchronous Processing Phase (Workers):</strong>
+                <ul>
+                  <li>A worker picks up the job from the queue.</li>
+                  <li>Acquires an idempotency lock on the event ID.</li>
+                  <li>Executes domain mutations (updates user subscriptions, charges cards, provisions credits).</li>
+                  <li>Updates event status to <code>processed</code>.</li>
+                  <li>Handles transient errors via exponential backoff or dead-letter queues.</li>
+                </ul>
+              </li>
+            </ol>
+
+            <h2>Step 3: Database Idempotency Schema in PostgreSQL</h2>
+            <p>Idempotency ensures that processing an event multiple times produces the exact same outcome as processing it once. Create a dedicated <code>webhook_events</code> table in PostgreSQL with strict uniqueness constraints:</p>
+            <pre><code>CREATE TYPE webhook_status AS ENUM ('received', 'processing', 'completed', 'failed');
+
+CREATE TABLE webhook_events (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  provider text NOT NULL, -- e.g., 'stripe', 'whatsapp', 'github'
+  event_id text NOT NULL, -- Provider's unique event identifier (e.g., evt_1092)
+  event_type text NOT NULL, -- e.g., 'invoice.payment_succeeded'
+  payload jsonb NOT NULL,
+  status webhook_status NOT NULL DEFAULT 'received',
+  attempts integer NOT NULL DEFAULT 0,
+  last_error text,
+  received_at timestamptz NOT NULL DEFAULT now(),
+  processed_at timestamptz,
+  -- Crucial unique index to guarantee at-most-once registration
+  CONSTRAINT uq_webhook_provider_event UNIQUE (provider, event_id)
+);
+
+CREATE INDEX idx_webhook_status_created ON webhook_events (status, received_at);</code></pre>
+            <p>When an incoming webhook arrives, use an <code>ON CONFLICT DO NOTHING</code> query. If the row already exists, the database immediately rejects the duplicate write without error, allowing the HTTP endpoint to acknowledge the provider safely:</p>
+            <pre><code>async function recordIncomingEvent(
+  provider: string,
+  eventId: string,
+  eventType: string,
+  payload: any
+): Promise&lt;{ isDuplicate: boolean; id?: string }&gt; {
+  const sql = `
+    INSERT INTO webhook_events (provider, event_id, event_type, payload)
+    VALUES ($1, $2, $3, $4)
+    ON CONFLICT (provider, event_id) DO NOTHING
+    RETURNING id;
+  `;
+  const result = await pool.query(sql, [provider, eventId, eventType, JSON.stringify(payload)]);
+
+  if (result.rowCount === 0) {
+    return { isDuplicate: true };
+  }
+  return { isDuplicate: false, id: result.rows[0].id };
+}</code></pre>
+
+            <h2>Step 4: Background Queue Processing with BullMQ</h2>
+            <p><strong>BullMQ</strong> is the industry-standard Redis-backed queue library for Node.js. It provides native support for delayed jobs, exponential retries, parent-child job workflows, and dead-letter queue isolation.</p>
+            <p>Install BullMQ:</p>
+            <pre><code>npm install bullmq</code></pre>
+
+            <h3>Configuring the Producer Queue</h3>
+            <p>Configure the ingestion queue with explicit retry policies and unique job IDs to prevent duplicate queuing:</p>
+            <pre><code>import { Queue } from "bullmq";
+import { redisConnection } from "./redis.js";
+
+export const webhookQueue = new Queue("incoming-webhooks", {
+  connection: redisConnection,
+  defaultJobOptions: {
+    // Retry up to 5 times on unhandled exceptions
+    attempts: 5,
+    backoff: {
+      type: "exponential",
+      delay: 2000 // Initial backoff: 2s, 4s, 8s, 16s, 32s
+    },
+    // Keep completed jobs for 24 hours for audit trails; keep failed jobs for debugging
+    removeOnComplete: { age: 86400, count: 5000 },
+    removeOnFail: { age: 604800, count: 10000 }
+  }
+});
+
+// Enqueue the verified webhook
+export async function enqueueWebhook(provider: string, eventId: string, eventType: string) {
+  await webhookQueue.add(
+    eventType,
+    { provider, eventId },
+    {
+      // Using provider eventId as BullMQ jobId prevents duplicate jobs in the queue!
+      jobId: `${provider}:${eventId}`
+    }
+  );
+}</code></pre>
+
+            <h3>Building the Dedicated Worker</h3>
+            <p>In a separate worker process, consume and process jobs with transaction-isolated idempotency:</p>
+            <pre><code>import { Worker, Job } from "bullmq";
+import { redisConnection } from "./redis.js";
+import { pool } from "./db.js";
+
+interface WebhookJobData {
+  provider: string;
+  eventId: string;
+}
+
+export const webhookWorker = new Worker&lt;WebhookJobData&gt;(
+  "incoming-webhooks",
+  async (job: Job&lt;WebhookJobData&gt;) =&gt; {
+    const { provider, eventId } = job.data;
+
+    const client = await pool.connect();
+    try {
+      await client.query("BEGIN");
+
+      // Lock the event row for update to prevent concurrent worker execution
+      const eventRes = await client.query(
+        `SELECT id, event_type, payload, status 
+         FROM webhook_events 
+         WHERE provider = $1 AND event_id = $2 
+         FOR UPDATE`,
+        [provider, eventId]
+      );
+
+      if (eventRes.rowCount === 0) {
+        throw new Error(`Webhook record not found for ${provider}:${eventId}`);
+      }
+
+      const event = eventRes.rows[0];
+
+      // If already processed, exit cleanly (idempotency guarantee)
+      if (event.status === "completed") {
+        await client.query("COMMIT");
+        return;
+      }
+
+      // Mark status as processing
+      await client.query(
+        `UPDATE webhook_events 
+         SET status = 'processing', attempts = attempts + 1 
+         WHERE id = $1`,
+        [event.id]
+      );
+
+      // Execute domain business logic based on event type
+      await processDomainEvent(event.event_type, event.payload, client);
+
+      // Mark completed
+      await client.query(
+        `UPDATE webhook_events 
+         SET status = 'completed', processed_at = now() 
+         WHERE id = $1`,
+        [event.id]
+      );
+
+      await client.query("COMMIT");
+    } catch (error: any) {
+      await client.query("ROLLBACK");
+      // Record error on the event record
+      await pool.query(
+        `UPDATE webhook_events 
+         SET last_error = $1 
+         WHERE provider = $2 AND event_id = $3`,
+        [error.message, provider, eventId]
+      );
+      // Re-throw so BullMQ triggers exponential backoff retry!
+      throw error;
+    } finally {
+      client.release();
+    }
+  },
+  {
+    connection: redisConnection,
+    concurrency: 10 // Process up to 10 webhooks concurrently per worker
+  }
+);</code></pre>
+
+            <h2>Step 5: Exponential Backoff, Jitter, and Dead-Letter Queues (DLQ)</h2>
+            <p>When a worker fails due to an external outage (such as a database deadlock or third-party API 500 error), retrying immediately overwhelms the struggling service. <strong>Exponential backoff</strong> doubles the delay between successive attempts.</p>
+            <p>Furthermore, in large distributed fleets, add <strong>full jitter</strong> to randomize retry timestamps. Without jitter, all workers that failed at time <code>T</code> will retry together at time <code>T + delay</code>, re-creating the initial traffic spike.</p>
+            <h3>Handling the Dead-Letter Queue (DLQ)</h3>
+            <p>If an event fails after exhausting all 5 retry attempts, BullMQ marks the job as <code>failed</code>. In webhook architecture, this is your Dead-Letter state. Implement an automated alerting hook and an administrative replay API:</p>
+            <pre><code>webhookWorker.on("failed", async (job, err) =&gt; {
+  if (job &amp;&amp; job.attemptsMade &gt;= (job.opts.attempts || 5)) {
+    console.error(
+      `CRITICAL: Webhook ${job.data.provider}:${job.data.eventId} permanently failed!`,
+      err.message
+    );
+    // Send PagerDuty / Slack alert to on-call engineering team
+    await sendOpsAlert({
+      title: "Webhook Permanently Failed",
+      details: { jobId: job.id, error: err.message, payload: job.data }
+    });
+  }
+});
+
+// Admin endpoint to manually re-queue fixed dead-letter webhooks
+app.post("/admin/webhooks/replay/:id", requireAdmin, async (req, res) =&gt; {
+  const { id } = req.params;
+  const event = await pool.query("SELECT * FROM webhook_events WHERE id = $1", [id]);
+  
+  if (event.rowCount === 0) {
+    return res.status(404).json({ error: "Event not found" });
+  }
+
+  await pool.query("UPDATE webhook_events SET status = 'received' WHERE id = $1", [id]);
+  await enqueueWebhook(event.rows[0].provider, event.rows[0].event_id, event.rows[0].event_type);
+
+  res.json({ message: "Webhook successfully re-enqueued for execution" });
+});</code></pre>
+
+            <h2>Step 6: Assembling the Express Endpoint</h2>
+            <p>Now, combine all controls into a clean, unified Express route:</p>
+            <pre><code>app.post("/api/webhooks/stripe", async (req, res) =&gt; {
+  const rawBody = req.body as Buffer;
+  const signature = req.headers["stripe-signature"] as string;
+
+  // 1. Verify HMAC Signature
+  const verification = verifyWebhookSignature(
+    rawBody,
+    signature,
+    process.env.STRIPE_WEBHOOK_SECRET!
+  );
+
+  if (!verification.isValid) {
+    console.warn("Rejected unauthorized webhook:", verification.error);
+    return res.status(400).send(`Webhook Error: ${verification.error}`);
+  }
+
+  // 2. Parse JSON safely now that authenticity is proven
+  let event: any;
+  try {
+    event = JSON.parse(rawBody.toString("utf8"));
+  } catch (err) {
+    return res.status(400).send("Malformed JSON body");
+  }
+
+  // 3. Persist Event Idempotently in PostgreSQL
+  const { isDuplicate } = await recordIncomingEvent(
+    "stripe",
+    event.id,
+    event.type,
+    event
+  );
+
+  if (isDuplicate) {
+    // Acknowledge duplicate immediately without re-enqueuing
+    return res.status(200).json({ received: true, note: "duplicate" });
+  }
+
+  // 4. Enqueue to BullMQ for Asynchronous Background Processing
+  await enqueueWebhook("stripe", event.id, event.type);
+
+  // 5. Acknowledge Provider within 150ms
+  return res.status(202).json({ received: true });
+});</code></pre>
+
+            <h2>Production Best Practices Checklist</h2>
+            <ul>
+              <li>Always verify cryptographic signatures against the raw body buffer using constant-time comparison.</li>
+              <li>Acknowledge webhooks with HTTP 200 or 202 in under 200ms before triggering business logic.</li>
+              <li>Store incoming event IDs in PostgreSQL with a unique constraint to guarantee idempotency.</li>
+              <li>Offload domain side effects to a Redis-backed queue like BullMQ.</li>
+              <li>Configure exponential backoff with randomized jitter on all background worker retries.</li>
+              <li>Set up alerting on dead-letter queue failures and provide an administrative replay endpoint.</li>
+            </ul>
+
+            <h2>Frequently Asked Questions</h2>
+            <h3>Why should I return HTTP 202 instead of HTTP 200?</h3>
+            <p>HTTP 202 Accepted explicitly signals to clients that the request has been received and validated, but processing has not yet concluded. However, some older providers require an exact 200 OK. Both are acceptable as long as response time remains under 200ms.</p>
+
+            <h3>How do I test webhooks on my local machine?</h3>
+            <p>Use official CLI tools like the <code>stripe listen --forward-to localhost:3000/api/webhooks/stripe</code> or Ngrok tunnels. The official Stripe CLI automatically creates a temporary local signing secret for signature verification.</p>
+
+            <h3>What if my database is down when a webhook arrives?</h3>
+            <p>If your database is completely unreachable during ingestion, return an HTTP 503 Service Unavailable. The provider will recognize the transient failure and automatically retry delivery according to its published retry schedule.</p>
+
+            <p>If you need assistance designing resilient backend architectures, event-driven queues, or high-volume payment integrations, explore our <a href="../services.html">backend engineering services</a>, inspect our <a href="../projects.html">verified case studies</a>, or consult our <a href="../skills.html">technical skills overview</a>. You can also <a href="../contact.html">contact Abubakkar Sajid directly to discuss your integration</a>.</p>
+          </div>
+
+          <footer class="blog-article-actions">
+            <a href="index.html" class="btn-cmd no-arrow">$ cd ~/blog</a>
+            <a href="../contact.html" class="btn-cmd btn-cmd--primary no-arrow">$ ./build_reliable_webhooks.sh<span class="btn-cursor">▊</span></a>
+          </footer>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="terminal footer-terminal">
+        <div class="terminal-titlebar">
+          <div class="terminal-dots">
+            <span class="dot-red"></span>
+            <span class="dot-amber"></span>
+            <span class="dot-green"></span>
+          </div>
+          <span class="terminal-title">footer.sh  ~/abubakkar</span>
+        </div>
+        <div class="terminal-body footer-body">
+          <div class="footer-grid">
+            <div class="footer-col footer-brand">
+              <p class="footer-logo">➜ ~/abubakkar</p>
+              <p class="footer-tagline">Full-stack developer building SaaS, APIs &amp; AI products from Lahore, Pakistan.</p>
+              <p class="footer-meta">● Open to remote &amp; freelance</p>
+            </div>
+            <nav class="footer-col" aria-label="Footer navigation">
+              <h3 class="footer-heading">Pages</h3>
+              <ul class="footer-links">
+                <li><a href="../index.html" class="no-arrow">home</a></li>
+                <li><a href="../about.html" class="no-arrow">about</a></li>
+                <li><a href="../skills.html" class="no-arrow">skills</a></li>
+                <li><a href="../projects.html" class="no-arrow">projects</a></li>
+                <li><a href="../services.html" class="no-arrow">services</a></li>
+                <li><a href="../experience.html" class="no-arrow">experience</a></li>
+                <li><a href="../reviews.html" class="no-arrow">reviews</a></li>
+                <li><a href="index.html" class="no-arrow">blog</a></li>
+                <li><a href="../contact.html" class="no-arrow">contact</a></li>
+              </ul>
+            </nav>
+            <div class="footer-col">
+              <h3 class="footer-heading">Contact</h3>
+              <ul class="footer-links">
+                <li><a href="mailto:hello@abubakkar.dev" class="no-arrow">hello@abubakkar.dev</a></li>
+                <li><a href="../contact.html" class="no-arrow">Get in touch →</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p class="footer-copy">© 2026 Abubakkar Sajid · Built with HTML, CSS &amp; JS</p>
+            <a href="#" class="back-to-top no-arrow">▲ back to top</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" data-toast role="status" aria-live="polite">
+    <span class="toast-message" data-toast-message></span>
+    <button type="button" class="toast-dismiss">[dismiss]</button>
+  </div>
+
+  <script src="../js/terminal.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</body>
+</html>

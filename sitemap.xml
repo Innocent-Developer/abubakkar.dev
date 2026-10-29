@@ -113,9 +113,59 @@
   </url>
   <url>
     <loc>https://www.abubakkar.dev/blog/index.html</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.abubakkar.dev/assets/og-image.png</image:loc>
+      <image:title>Abubakkar Sajid - Full-Stack &amp; Backend Developer</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.abubakkar.dev/blog/build-mcp-server-nodejs-typescript.html</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.abubakkar.dev/assets/og-image.png</image:loc>
+      <image:title>Abubakkar Sajid - Full-Stack &amp; Backend Developer</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.abubakkar.dev/blog/rag-architecture-production-guide.html</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.abubakkar.dev/assets/og-image.png</image:loc>
+      <image:title>Abubakkar Sajid - Full-Stack &amp; Backend Developer</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.abubakkar.dev/blog/redis-caching-nodejs-guide.html</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.abubakkar.dev/assets/og-image.png</image:loc>
+      <image:title>Abubakkar Sajid - Full-Stack &amp; Backend Developer</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.abubakkar.dev/blog/ai-agent-architecture-production.html</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.abubakkar.dev/assets/og-image.png</image:loc>
+      <image:title>Abubakkar Sajid - Full-Stack &amp; Backend Developer</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.abubakkar.dev/blog/reliable-webhooks-nodejs.html</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
     <image:image>
       <image:loc>https://www.abubakkar.dev/assets/og-image.png</image:loc>
       <image:title>Abubakkar Sajid - Full-Stack &amp; Backend Developer</image:title>
